@@ -1,7 +1,6 @@
 # Enhanced Natural Wonders Selection for Civilization VI
 A mod which enables variable numbers of Natural Wonders on standard map sizes.
 
-# Features
 ## Natural Wonders slider
 Provides a slider which allows for control over the number of Natural Wonders that spawn in a game. The range of this slider varies with the selected map size, per the table below. 
 
