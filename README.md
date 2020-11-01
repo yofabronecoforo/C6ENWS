@@ -22,9 +22,7 @@ A Duel map with 1-2 NWs per player? A Huge map with only one total NW? Any size 
 Used in conjunction with the official Natural Wonders selector, it is almost possible to guarantee that only the number of and specific NWs selected spawn. The generated map must still contain a valid plot to place a given NW in; if none exist or remain, the NW won't be placed.
 
 ## Natural Wonders selector
-The button text for the official Natural Wonders selector now reflects the number of selected NWs when all available NWs have been selected, like it does for custom selections.
-
-The tooltip text for this option dynamically updates to reflect the source(s) of available Natural Wonders, which can vary depending on enabled additional content and the currently selected ruleset.
+The button text for the official Natural Wonders selector now reflects the number of selected NWs when all available NWs have been selected, like it does for custom selections. The tooltip text for this option now dynamically updates to reflect the source(s) of available Natural Wonders, which can vary depending on enabled additional content and the currently selected ruleset.
 
 # Compatability
 Requires the official Natural Wonders selector, so probably won't work with builds lacking this feature.
