@@ -39,9 +39,19 @@ Works with the following rulesets:
 - Gathering Storm
 
 # Conflicts
-Replaces the following lua files:
+This mod uses the following custom table(s) in the game's SQLite Configuration database:
+- ContentFlags
+
+If your mod uses any similarly-named custom tables, compatibility issues *may* arise.
+
+This mod adds custom columns to the following table(s) in the game's SQLite Configuration database:
+- MapSizes
+
+If your mod uses any similarly-named custom columns, in any of the tables named above, compatibility issues *may* arise.
+
+This mod replaces the following lua file(s):
 - AdvancedSetup.lua
 - GameSetupLogic.lua
 - NaturalWonderGenerator.lua
 
-This will break mods that make changes to any of these files.
+If your mod replaces any of these files, compatibility issues **will** arise.
