@@ -24,7 +24,7 @@ Used in conjunction with the official Natural Wonders selector, it is almost pos
 ## Natural Wonders selector
 The button text for the official Natural Wonders selector now reflects the number of selected NWs when all available NWs have been selected, like it does for custom selections. The tooltip text for this option now dynamically updates to reflect the source(s) of available Natural Wonders, which can vary depending on enabled additional content and the currently selected ruleset.
 
-# Compatability
+# Compatibility
 Requires the official Natural Wonders selector, so probably won't work with builds lacking this feature.
 
 Works with the following rulesets:
