@@ -82,6 +82,7 @@ function GetContentFlag(sContent)
 	end
 end
 
+local dlcAztec				= GetContentFlag("DLC_AZTEC_ENABLED");
 local dlcPoland				= GetContentFlag("DLC_POLAND_ENABLED");
 local dlcVikings			= GetContentFlag("DLC_VIKINGS_ENABLED");
 local dlcAustralia			= GetContentFlag("DLC_AUSTRALIA_ENABLED");
@@ -104,6 +105,9 @@ function UpdateButtonToolTip(parameterId)
 	local availableContent = "[NEWLINE]Available content:[NEWLINE]  Standard";
 	local selectedRuleset = GameConfiguration.GetValue("RULESET");
 	if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+		if (dlcAztec > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Aztec Civilization Pack";
+		end
 		if (dlcPoland > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
 			availableContent = availableContent .. "[NEWLINE]  DLC: Poland Civilization & Scenario Pack";
 		end
