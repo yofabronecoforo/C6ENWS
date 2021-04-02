@@ -2,8 +2,6 @@
 A mod which enables variable numbers of Natural Wonders on standard map sizes.
 
 # Features
-This mod's features include the following:
-
 ### Natural Wonders slider
 Provides a slider which allows for control over the number of Natural Wonders that spawn in a game. The range of this slider varies with the selected map size, per the table below. 
 
@@ -29,6 +27,7 @@ These, and more, are now possible.
 
 ### Natural Wonders selector
 The button text for the official Natural Wonders selector now reflects the number of selected NWs when all available NWs have been selected, like it does for custom selections. The tooltip text for this option now dynamically updates to reflect the source(s) of available Natural Wonders, which can vary depending on enabled additional content and the currently selected ruleset.
+- This functionality extends to the built-in City-States and Random Leaders selector(s).
 
 # Compatibility
 Requires the official Natural Wonders selector, so probably won't work with builds lacking this feature.
@@ -52,6 +51,7 @@ If your mod uses any similarly-named custom columns, in any of the tables named 
 This mod replaces the following lua file(s):
 - AdvancedSetup.lua
 - GameSetupLogic.lua
+- HostGame.lua
 - NaturalWonderGenerator.lua
 
 If your mod replaces any of these files, compatibility issues **will** arise.
