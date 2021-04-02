@@ -19,6 +19,12 @@ ALTER TABLE MapSizes ADD MinNaturalWonders INTEGER NOT NULL DEFAULT 0;
 ALTER TABLE MapSizes ADD MaxNaturalWonders INTEGER NOT NULL DEFAULT 0;
 ALTER TABLE MapSizes ADD DefaultNaturalWonders INTEGER NOT NULL DEFAULT 0;
 
+-- Define trigger to detect the presence of installed and enabled content : Aztec DLC
+CREATE TRIGGER IF NOT EXISTS AztecDLC_Enabled AFTER INSERT ON Players WHEN NEW.CivilizationType = 'CIVILIZATION_AZTEC' AND NEW.Domain = 'Players:StandardPlayers'
+BEGIN
+	INSERT INTO ContentFlags (Name, Value) VALUES ('DLC_AZTEC_ENABLED', 1);
+END;
+
 -- Define trigger to detect the presence of installed and enabled content : Poland DLC
 CREATE TRIGGER IF NOT EXISTS PolandDLC_Enabled AFTER INSERT ON Players WHEN NEW.CivilizationType = 'CIVILIZATION_POLAND' AND NEW.Domain = 'Players:StandardPlayers'
 BEGIN
