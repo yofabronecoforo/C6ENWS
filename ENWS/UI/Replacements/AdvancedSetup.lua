@@ -1,8 +1,8 @@
---############################################################################
+-- ###########################################################################
 --	ENWS	:	Enhanced Natural Wonders Selection for Civilization VI
---	Copyright (c) 2020 zzragnar0kzz
+--	Copyright (c) 2020-2021 zzragnar0kzz
 --	All rights reserved.
---############################################################################
+-- ###########################################################################
 
 -- ===========================================================================
 --	Single Player Create Game w/ Advanced Options
@@ -11,12 +11,12 @@ include("InstanceManager");
 include("PlayerSetupLogic");
 include("Civ6Common");
 include("SupportFunctions");
+include("PopupDialog");
 
 -- ENWS : Define mod prefix for log messages
 local msgHeader = " *** ENWS: ";
 local rowOfDashes = "--------------------------------------------------------------------";
 print(msgHeader .. "Loading modified AdvancedSetup.lua . . .");
---print(msgHeader .. "Selected ruleset: " .. tostring(GameConfiguration.GetValue("RULESET")));
 
 -- ===========================================================================
 -- ===========================================================================
@@ -52,6 +52,8 @@ local m_RulesetData					:table = {};
 local m_BasicTooltipData			:table = {};
 local m_WorldBuilderImport          :boolean = false;
 
+local m_pCityStateWarningPopup:table = PopupDialog:new("CityStateWarningPopup");
+
 -- ===========================================================================
 -- Override hiding game setup to release simplified instances.
 -- ===========================================================================
@@ -80,11 +82,73 @@ function GetContentFlag(sContent)
 	end
 end
 
-local dlcVikingsContent		= GetContentFlag("DLC_VIKINGSCONTENT_ENABLED");
-local expansion1Content		= GetContentFlag("EXPANSION_1_ENABLED");
-local expansion2Content		= GetContentFlag("EXPANSION_2_ENABLED");
+local dlcPoland				= GetContentFlag("DLC_POLAND_ENABLED");
+local dlcVikings			= GetContentFlag("DLC_VIKINGS_ENABLED");
+local dlcAustralia			= GetContentFlag("DLC_AUSTRALIA_ENABLED");
+local dlcPersiaMacedon		= GetContentFlag("DLC_PERSIA_MACEDON_ENABLED");
+local dlcNubia				= GetContentFlag("DLC_NUBIA_ENABLED");
+local dlcKhmerIndonesia		= GetContentFlag("DLC_KHMER_INDONESIA_ENABLED");
+local xp1Content			= GetContentFlag("EXPANSION_1_ENABLED");
+local xp2Content			= GetContentFlag("EXPANSION_2_ENABLED");
 local dlcGranColombiaMaya	= GetContentFlag("DLC_GRANCOLOMBIA_MAYA_ENABLED");
+local dlcEthiopia			= GetContentFlag("DLC_ETHIOPIA_ENABLED");
+local dlcByzantiumGaul		= GetContentFlag("DLC_BYZANTIUM_GAUL_ENABLED");
+local dlcBabylon			= GetContentFlag("DLC_BABYLON_ENABLED");
+local dlcVietnamKublaiKhan	= GetContentFlag("DLC_VIETNAM_KUBLAI_KHAN_ENABLED");
+local dlcPortugal			= GetContentFlag("DLC_PORTUGAL_ENABLED");
 print(rowOfDashes);
+
+-- ENWS : update button tooltip(s) to reflect available content 
+function UpdateButtonToolTip(parameterId)
+	print(" *** ENWS: ", parameterId, ": Updating button tooltip(s) . . .");
+	local availableContent = "[NEWLINE]Available content:[NEWLINE]  Standard";
+	local selectedRuleset = GameConfiguration.GetValue("RULESET");
+	if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+		if (dlcPoland > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Poland Civilization & Scenario Pack";
+		end
+		if (dlcVikings > 0) then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Vikings Scenario Pack";
+		end
+		if (dlcAustralia > 0 and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Australia Civilization & Scenario Pack";
+		end
+		if (dlcPersiaMacedon > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Persia and Macedon Civilization & Scenario Pack";
+		end
+		if (dlcNubia > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Nubia Civilization & Scenario Pack";
+		end
+		if (dlcKhmerIndonesia > 0 and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Khmer and Indonesia Civilization & Scenario Pack";
+		end
+		if (xp1Content > 0 and selectedRuleset ~= "RULESET_STANDARD") then
+			availableContent = availableContent .. "[NEWLINE]  Expansion: Rise and Fall";
+		end
+		if (xp2Content > 0 and selectedRuleset ~= "RULESET_STANDARD" and selectedRuleset ~= "RULESET_EXPANSION_1") then
+			availableContent = availableContent .. "[NEWLINE]  Expansion: Gathering Storm";
+		end
+		if (dlcGranColombiaMaya > 0) then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Gran Colombia and Maya Pack";
+		end
+		if (dlcEthiopia > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Ethiopia Pack";
+		end
+		if (dlcByzantiumGaul > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Byzantium & Gaul Pack";
+		end
+		if (dlcBabylon > 0 and parameterId ~= "NaturalWonders") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Babylon Pack";
+		end
+		if (dlcVietnamKublaiKhan > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Vietnam & Kublai Khan Pack";
+		end
+		if (dlcPortugal > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
+			availableContent = availableContent .. "[NEWLINE]  DLC: Portugal Pack";
+		end
+	end
+	return availableContent;
+end
 
 -- ===========================================================================
 -- Input Handler
@@ -500,37 +564,6 @@ function CreateButtonPopupDriver(o, parameter, activateFunc, parent )
 	return kDriver;
 end
 
--- ENWS: 
-function UpdateButtonToolTip(parameterId)
-	print(" *** ENWS: ", parameterId, ": Updating tooltip for the selector . . .");
-	local availableContent = "[NEWLINE] Standard";
-
-	-- ENWS : get the currently selected ruleset
-	local selectedRuleset = GameConfiguration.GetValue("RULESET");
-	print(" *** ENWS: Selected ruleset:", selectedRuleset);
-
-	-- ENWS : check content flags for enabled additional content
-	if (parameterId == "NaturalWonders") then
-		if (dlcVikingsContent > 0) then
-			print(" *** ENWS: Vikings Content DLC installed and enabled . . .");
-			availableContent = availableContent .. "[NEWLINE] DLC: Vikings Content";
-		end
-		if (expansion1Content > 0 and selectedRuleset ~= "RULESET_STANDARD") then
-			print(" *** ENWS: Using Expansion1 or newer ruleset . . .");
-			availableContent = availableContent .. "[NEWLINE] Expansion: Rise and Fall";
-		end
-		if (expansion2Content > 0 and selectedRuleset ~= "RULESET_STANDARD" and selectedRuleset ~= "RULESET_EXPANSION_1") then
-			print(" *** ENWS: Using Expansion2 or newer ruleset . . .");
-			availableContent = availableContent .. "[NEWLINE] Expansion: Gathering Storm";
-		end
-		if (dlcGranColombiaMaya > 0) then
-			print(" *** ENWS: Gran Colombia and Maya DLC installed and enabled . . .");
-			availableContent = availableContent .. "[NEWLINE] DLC: Gran Colombia and Maya";
-		end
-	end
-	return availableContent;
-end
-
 -- ===========================================================================
 -- This driver is for launching a multi-select option in a separate window.
 -- ===========================================================================
@@ -544,13 +577,11 @@ function CreateMultiSelectWindowDriver(o, parameter, parent)
 	local c :object = g_ButtonParameterManager:GetInstance();	
 
 	local parameterId = parameter.ParameterId;
-	
 	local button = c.Button;
 	button:RegisterCallback( Mouse.eLClick, function()
 		LuaEvents.MultiSelectWindow_Initialize(o.Parameters[parameterId]);
 		Controls.MultiSelectWindow:SetHide(false);
 	end);
-
 	-- ENWS: Update tooltips to reflect enabled additional content
 	local buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
 	button:SetToolTipString(buttonToolTip);
@@ -571,6 +602,220 @@ function CreateMultiSelectWindowDriver(o, parameter, parent)
 		UpdateValue = function(value, p)
 			local valueText = value and value.Name or nil;
 			local valueAmount :number = 0;
+		
+			if(valueText == nil) then
+				if(value == nil) then
+					if (parameter.UxHint ~= nil and parameter.UxHint == "InvertSelection") then
+						valueText = "LOC_SELECTION_EVERYTHING";
+						-- ENWS : Display count for selections of "everything"
+						valueAmount = #p.Values;
+					else
+						valueText = "LOC_SELECTION_NOTHING";
+					end
+				elseif(type(value) == "table") then
+					local count = #value;
+					if (parameter.UxHint ~= nil and parameter.UxHint == "InvertSelection") then
+						if(count == 0) then
+							valueText = "LOC_SELECTION_EVERYTHING";
+							-- ENWS : Display count for selections of "everything"
+							valueAmount = #p.Values;
+						elseif(count == #p.Values) then
+							valueText = "LOC_SELECTION_NOTHING";
+						else
+							valueText = "LOC_SELECTION_CUSTOM";
+							valueAmount = #p.Values - count;
+						end
+					else
+						if(count == 0) then
+							valueText = "LOC_SELECTION_NOTHING";
+						elseif(count == #p.Values) then
+							valueText = "LOC_SELECTION_EVERYTHING";
+							-- ENWS : Display count for selections of "everything"
+							valueAmount = #p.Values;
+						else
+							valueText = "LOC_SELECTION_CUSTOM";
+							valueAmount = count;
+						end
+					end
+				end
+			end				
+
+			if(cache.ValueText ~= valueText) or (cache.ValueAmount ~= valueAmount) then
+				local button = c.Button;			
+				button:LocalizeAndSetText(valueText, valueAmount);
+				cache.ValueText = valueText;
+				cache.ValueAmount = valueAmount;
+				-- ENWS: Update tooltips to reflect enabled additional content and selected ruleset
+				buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+				button:SetToolTipString(buttonToolTip);
+			end
+		end,
+		UpdateValues = function(values, p) 
+			-- Values are refreshed when the window is open.
+		end,
+		SetEnabled = function(enabled, p)
+			c.Button:SetDisabled(not enabled or #p.Values <= 1);
+		end,
+		SetVisible = function(visible)
+			c.ButtonRoot:SetHide(not visible);
+		end,
+		Destroy = function()
+			g_ButtonParameterManager:ReleaseInstance(c);
+		end,
+	};	
+
+	return kDriver;
+end
+
+-- ===========================================================================
+-- This driver is for launching the city-state picker in a separate window.
+-- ===========================================================================
+function CreateCityStatePickerDriver(o, parameter, parent)
+
+	if(parent == nil) then
+		parent = GetControlStack(parameter.GroupId);
+	end
+			
+	-- Get the UI instance
+	local c :object = g_ButtonParameterManager:GetInstance();	
+
+	local parameterId = parameter.ParameterId;
+	local button = c.Button;
+	button:RegisterCallback( Mouse.eLClick, function()
+		LuaEvents.CityStatePicker_Initialize(o.Parameters[parameterId], g_GameParameters);
+		Controls.CityStatePicker:SetHide(false);
+	end);
+	-- ENWS: Update tooltips to reflect enabled additional content
+	local buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+	button:SetToolTipString(buttonToolTip);
+
+	-- Store the root control, NOT the instance table.
+	g_SortingMap[tostring(c.ButtonRoot)] = parameter;
+
+	c.ButtonRoot:ChangeParent(parent);
+	if c.StringName ~= nil then
+		c.StringName:SetText(parameter.Name);
+	end
+
+	local cache = {};
+
+	local kDriver :table = {
+		Control = c,
+		Cache = cache,
+		UpdateValue = function(value, p)
+			local valueText = value and value.Name or nil;
+			local valueAmount :number = 0;
+		
+			if(valueText == nil) then
+				if(value == nil) then
+					if (parameter.UxHint ~= nil and parameter.UxHint == "InvertSelection") then
+						valueText = "LOC_SELECTION_EVERYTHING";
+						-- ENWS : Display count for selections of "everything"
+						valueAmount = #p.Values;
+					else
+						valueText = "LOC_SELECTION_NOTHING";
+					end
+				elseif(type(value) == "table") then
+					local count = #value;
+					if (parameter.UxHint ~= nil and parameter.UxHint == "InvertSelection") then
+						if(count == 0) then
+							valueText = "LOC_SELECTION_EVERYTHING";
+							-- ENWS : Display count for selections of "everything"
+							valueAmount = #p.Values;
+						elseif(count == #p.Values) then
+							valueText = "LOC_SELECTION_NOTHING";
+						else
+							valueText = "LOC_SELECTION_CUSTOM";
+							valueAmount = #p.Values - count;
+						end
+					else
+						if(count == 0) then
+							valueText = "LOC_SELECTION_NOTHING";
+						elseif(count == #p.Values) then
+							valueText = "LOC_SELECTION_EVERYTHING";
+							-- ENWS : Display count for selections of "everything"
+							valueAmount = #p.Values;
+						else
+							valueText = "LOC_SELECTION_CUSTOM";
+							valueAmount = count;
+						end
+					end
+				end
+			end				
+
+			if(cache.ValueText ~= valueText) or (cache.ValueAmount ~= valueAmount) then
+				local button = c.Button;			
+				button:LocalizeAndSetText(valueText, valueAmount);
+				cache.ValueText = valueText;
+				cache.ValueAmount = valueAmount;
+				-- ENWS: Update tooltips to reflect enabled additional content and selected ruleset
+				buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+				button:SetToolTipString(buttonToolTip);
+			end
+		end,
+		UpdateValues = function(values, p) 
+			-- Values are refreshed when the window is open.
+		end,
+		SetEnabled = function(enabled, p)
+			c.Button:SetDisabled(not enabled or #p.Values <= 1);
+		end,
+		SetVisible = function(visible)
+			c.ButtonRoot:SetHide(not visible);
+		end,
+		Destroy = function()
+			g_ButtonParameterManager:ReleaseInstance(c);
+		end,
+	};	
+
+	return kDriver;
+end
+
+-- ===========================================================================
+-- This driver is for launching the leader picker in a separate window.
+-- ===========================================================================
+function CreateLeaderPickerDriver(o, parameter, parent)
+
+	if(parent == nil) then
+		parent = GetControlStack(parameter.GroupId);
+	end
+			
+	-- Get the UI instance
+	local c :object = g_ButtonParameterManager:GetInstance();	
+
+	local parameterId = parameter.ParameterId;
+	local button = c.Button;
+	button:RegisterCallback( Mouse.eLClick, function()
+		LuaEvents.LeaderPicker_Initialize(o.Parameters[parameterId], g_GameParameters);
+		Controls.LeaderPicker:SetHide(false);
+	end);
+	-- ENWS: Update tooltips to reflect enabled additional content
+	local buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+	button:SetToolTipString(buttonToolTip);
+
+	-- Store the root control, NOT the instance table.
+	g_SortingMap[tostring(c.ButtonRoot)] = parameter;
+
+	c.ButtonRoot:ChangeParent(parent);
+	if c.StringName ~= nil then
+		c.StringName:SetText(parameter.Name);
+	end
+
+	local cache = {};
+
+	local kDriver :table = {
+		Control = c,
+		Cache = cache,
+		UpdateValue = function(value, p)
+			local valueText = value and value.Name or nil;
+			local valueAmount :number = 0;
+
+			-- Remove random leaders from the Values table that is used to determine number of leaders selected
+			for i = #p.Values, 1, -1 do
+				local kItem:table = p.Values[i];
+				if kItem.Value == "RANDOM" or kItem.Value == "RANDOM_POOL1" or kItem.Value == "RANDOM_POOL2" then
+					table.remove(p.Values, i);
+				end
+			end
 		
 			if(valueText == nil) then
 				if(value == nil) then
@@ -975,7 +1220,17 @@ end
 
 function GameParameters_UI_CreateParameterDriver(o, parameter, ...)
 
-	if(parameter.Array) then
+	if(parameter.ParameterId == "CityStates") then
+		if GameConfiguration.IsWorldBuilderEditor() then
+			return nil;
+		end
+		return CreateCityStatePickerDriver(o, parameter);
+	elseif(parameter.ParameterId == "LeaderPool1" or parameter.ParameterId == "LeaderPool2") then
+		if GameConfiguration.IsWorldBuilderEditor() then
+			return nil;
+		end
+		return CreateLeaderPickerDriver(o, parameter);
+	elseif(parameter.Array) then
 		return CreateMultiSelectWindowDriver(o, parameter);
 	else
 		return GameParameters_UI_DefaultCreateParameterDriver(o, parameter, ...);
@@ -1134,6 +1389,7 @@ function UI_PostRefreshParameters()
 		if(err) then
 			Controls.StartButton:SetDisabled(true);
 			Controls.StartButton:LocalizeAndSetToolTip("LOC_SETUP_PLAYER_PARAMETER_ERROR");
+			Controls.ConflictPopup:SetHide(false);
 		end
 	end
 
@@ -1307,10 +1563,38 @@ function OnStartButton()
 			Network.HostGame(ServerType.SERVER_TYPE_NONE);
 		end
 	else
-		-- No, start a normal game
-		UI.PlaySound("Set_View_3D");
-		Network.HostGame(ServerType.SERVER_TYPE_NONE);
+		if AreAllCityStateSlotsUsed() then
+			HostGame();
+		else
+			m_pCityStateWarningPopup:ShowOkCancelDialog(Locale.Lookup("LOC_CITY_STATE_PICKER_TOO_FEW_WARNING"), HostGame);
+		end
 	end
+end
+
+-- ===========================================================================
+function HostGame()
+	-- Start a normal game
+	UI.PlaySound("Set_View_3D");
+	Network.HostGame(ServerType.SERVER_TYPE_NONE);
+end
+
+-- ===========================================================================
+function AreAllCityStateSlotsUsed()
+	local kParameters:table = g_GameParameters["Parameters"];
+
+	if kParameters["CityStates"] == nil then
+		return true;
+	end
+
+	local cityStateSlots:number = kParameters["CityStateCount"].Value;
+	local totalCityStates:number = #kParameters["CityStates"].AllValues;
+	local excludedCityStates:number = kParameters["CityStates"].Value ~= nil and #kParameters["CityStates"].Value or 0;
+
+	if (totalCityStates - excludedCityStates) < cityStateSlots then
+		return false;
+	end
+
+	return true;
 end
 
 ----------------------------------------------------------------    
@@ -1460,6 +1744,8 @@ function OnShutdown()
 
 	LuaEvents.MapSelect_SetMapByValue.Remove( OnSetMapByValue );
 	LuaEvents.MultiSelectWindow_SetParameterValues.Remove(OnSetParameterValues);
+	LuaEvents.CityStatePicker_SetParameterValues.Remove(OnSetParameterValues);
+	LuaEvents.LeaderPicker_SetParameterValues.Remove(OnSetParameterValues);
 end
 
 -- ===========================================================================
@@ -1488,6 +1774,8 @@ function Initialize()
 	Controls.SaveConfig:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
 	Controls.MapSelectButton:RegisterCallback( Mouse.eLClick, OnMapSelect );
 	Controls.MapSelectButton:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
+	Controls.ConflictConfirmButton:RegisterCallback( Mouse.eLClick, function() Controls.ConflictPopup:SetHide(true); end);
+	Controls.ConflictConfirmButton:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
 	
 	Events.FinishedGameplayContentConfigure.Add(OnFinishedGameplayContentConfigure);
 	Events.SystemUpdateUI.Add( OnUpdateUI );
@@ -1495,6 +1783,8 @@ function Initialize()
 
 	LuaEvents.MapSelect_SetMapByValue.Add( OnSetMapByValue );
 	LuaEvents.MultiSelectWindow_SetParameterValues.Add(OnSetParameterValues);
+	LuaEvents.CityStatePicker_SetParameterValues.Add(OnSetParameterValues);
+	LuaEvents.LeaderPicker_SetParameterValues.Add(OnSetParameterValues);
 
 	Resize();
 end
