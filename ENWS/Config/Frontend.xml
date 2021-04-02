@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- ENWS : Enhanced Natural Wonders Selection for Civilization VI. Copyright (c) 2020-2021 zzragnar0kzz. All rights reserved. -->
 <GameInfo>
 	<!-- ENWS : This is still here because my dumb ass hasn't yet figured out how to incorporate it into the mod's SQL configuration
 		May not even be necessary, if MAP_MIN_NATURAL_WONDERS and MAP_MAX_NATURAL_WONDERS were used directly in the specified SQL queries
