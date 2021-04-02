@@ -1,9 +1,27 @@
 /* ###########################################################################
+    ENWS	:	Enhanced Natural Wonders Selection for Civilization VI
+    Copyright (c) 2020-2021 zzragnar0kzz
+    All rights reserved.
+########################################################################### */
+
+/* ###########################################################################
     Begin ENWS Frontend configuration
 ########################################################################### */
 
+-- Reposition the Game Speed parameter
+UPDATE Parameters SET SortIndex = 70 WHERE ParameterId = 'GameSpeeds';
+
 -- Reposition the Disaster Intensity slider
-UPDATE Parameters SET SortIndex = 85 WHERE Domain = 'RealismRange';
+UPDATE Parameters SET SortIndex = 71 WHERE Domain = 'RealismRange';
+
+-- Reposition the Leader Pool 1 selector
+UPDATE Parameters SET SortIndex = 72 WHERE ParameterId = 'LeaderPool1';
+
+-- Reposition the Leader Pool 2 selector
+UPDATE Parameters SET SortIndex = 73 WHERE ParameterId = 'LeaderPool2';
+
+-- Reposition the City-States selector
+UPDATE Parameters SET SortIndex = 81 WHERE ParameterId = 'CityStates';
 
 -- Reposition the Resources parameter
 UPDATE Parameters SET SortIndex = 235 WHERE Domain = 'Resources';
