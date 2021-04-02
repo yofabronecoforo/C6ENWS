@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="1.0">
     <Properties>
         <Name>LOC_ENWS_MOD_TITLE</Name>
@@ -14,7 +14,8 @@
 		<Mod id="4873eb62-8ccc-4574-b784-dda455e74e68" title="LOC_EXPANSION2_MOD_TITLE"/>
 		<Mod id="2F6E858A-28EF-46B3-BEAC-B985E52E9BC1" title="LOC_MOD_VIKINGSLANDMARKS_TITLE"/>
 		<Mod id="9DE86512-DE1A-400D-8C0A-AB46EBBF76B9" title="LOC_GRANCOLOMBIA_MAYA_MOD_TITLE"/>
-		<Mod id="1B394FE9-23DC-4868-8F0A-5220CB8FB427" title="LOC_ETHIOPIA_MOD_TITLE"/>
+		<!--<Mod id="1B394FE9-23DC-4868-8F0A-5220CB8FB427" title="LOC_ETHIOPIA_MOD_TITLE"/>
+		<Mod id="8424840C-92EF-4426-A9B4-B4E0CB818049" title="LOC_BABYLON_MOD_TITLE"/>-->
 	</References>
 	<ActionCriteria>
 		<Criteria id="ENWS" any="1">
@@ -38,9 +39,12 @@
 		<Criteria id="ENWS_GranColombia_Maya" any="1">
 			<ModInUse>9DE86512-DE1A-400D-8C0A-AB46EBBF76B9</ModInUse>
 		</Criteria>
-		<Criteria id="ENWS_Ethiopia" any="1">
+		<!--<Criteria id="ENWS_Ethiopia" any="1">
 			<ModInUse>1B394FE9-23DC-4868-8F0A-5220CB8FB427</ModInUse>
 		</Criteria>
+		<Criteria id="ENWS_Babylon" any="1">
+			<ModInUse>8424840C-92EF-4426-A9B4-B4E0CB818049</ModInUse>
+		</Criteria>-->
 	</ActionCriteria>
 	<InGameActions>
 		<ImportFiles id="ENWS_INGAME_LUA_BASE" criteria="ENWS_Standard">
@@ -90,6 +94,7 @@
 			<Items>
 				<File>ENWS/UI/Replacements/AdvancedSetup.lua</File>
 				<File>ENWS/UI/Replacements/GameSetupLogic.lua</File>
+				<File>ENWS/UI/Replacements/Multiplayer/HostGame.lua</File>
 			</Items>
 		</ImportFiles>
 		<UpdateDatabase id="ENWS_FRONTEND">
@@ -105,10 +110,10 @@
 			<en_US>Enhanced Natural Wonders Selection</en_US>
 		</Text>
 		<Text id="LOC_ENWS_MOD_TEASER">
-			<en_US>Provides a slider which allows for control over the number of Natural Wonders that spawn in a game.</en_US>
+			<en_US>Allows finer control over the number of Natural Wonders that spawn in a game.</en_US>
 		</Text>
 		<Text id="LOC_ENWS_MOD_DESCRIPTION">
-			<en_US>Provides a slider which allows for control over the number of Natural Wonders that spawn in a game.</en_US>
+			<en_US>Enables variable numbers of Natural Wonders on each built-in Map Size, ranging from zero to twice the default number for a given Map Size.[NEWLINE]Provides a slider to control the number of Natural Wonders that spawn in a game.</en_US>
 		</Text>
 		<Text id="LOC_ENWS_MOD_AUTHORS">
 			<en_US>zzragnar0kzz</en_US>
@@ -132,5 +137,7 @@
 		
 		<File>ENWS/UI/Replacements/AdvancedSetup.lua</File>
 		<File>ENWS/UI/Replacements/GameSetupLogic.lua</File>
+
+		<File>ENWS/UI/Replacements/Multiplayer/HostGame.lua</File>
 	</Files>
 </Mod>
