@@ -113,7 +113,7 @@
 			<en_US>Allows finer control over the number of Natural Wonders that spawn in a game.</en_US>
 		</Text>
 		<Text id="LOC_ENWS_MOD_DESCRIPTION">
-			<en_US>Enables variable numbers of Natural Wonders on each built-in Map Size, ranging from zero to twice the default number for a given Map Size.[NEWLINE]Provides a slider to control the number of Natural Wonders that spawn in a game.</en_US>
+			<en_US>Enables variable numbers of Natural Wonders on each built-in Map Size, ranging from zero to twice the default number for a given Map Size.[NEWLINE][NEWLINE]Provides a slider to control the number of Natural Wonders that spawn in a game.[NEWLINE][NEWLINE]Dynamically updates the tooltip text for the Natural Wonders selector to reflect the sources of available content. This change also applies to the tooltip text for the City-States and Leader Pool selectors.</en_US>
 		</Text>
 		<Text id="LOC_ENWS_MOD_AUTHORS">
 			<en_US>zzragnar0kzz</en_US>
