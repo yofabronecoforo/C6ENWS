@@ -37,6 +37,18 @@ Works with the following rulesets:
 - Rise and Fall
 - Gathering Storm
 
+# Installation
+### Automatic
+ENWS is [Steam Workshop item 2273495829](https://steamcommunity.com/sharedfiles/filedetails/?id=2273495829). Subscribe to automatically download and install the latest release, and to automatically receive any updates as they are published to the Workshop.
+
+### Manual
+Download the [latest release](https://github.com/zzragnar0kzz/C6ENWS/releases/latest) and extract it into the game's local mods folder. Alternately, clone the repository into the game's local mods folder using your preferred tools. The local mods folder varies:
+- Windows : `$userprofile\Documents\My Games\Sid Meier's Civilization VI\Mods`
+- Linux : 
+- MacOS : 
+
+To update to a newer release, clone or download the latest release as described above, overwriting any existing items in the destination folder.
+
 # Conflicts
 This mod uses the following custom table(s) in the game's SQLite Configuration database:
 - ContentFlags
