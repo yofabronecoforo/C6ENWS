@@ -50,17 +50,17 @@ Download the [latest release](https://github.com/zzragnar0kzz/C6ENWS/releases/la
 To update to a newer release, clone or download the latest release as described above, overwriting any existing items in the destination folder.
 
 # Conflicts
-This mod uses the following custom table(s) in the game's SQLite Configuration database:
+ENWS uses the following custom table(s) in the game's SQLite Configuration database:
 - ContentFlags
 
 If your mod uses any similarly-named custom tables, compatibility issues *may* arise.
 
-This mod adds custom columns to the following table(s) in the game's SQLite Configuration database:
+ENWS adds custom columns to the following table(s) in the game's SQLite Configuration database:
 - MapSizes
 
-If your mod uses any similarly-named custom columns, in any of the tables named above, compatibility issues *may* arise.
+If your mod uses any custom columns with similar names in any of the tables named above, compatibility issues *may* arise.
 
-This mod replaces the following lua file(s):
+ENWS replaces the following lua file(s):
 - AdvancedSetup.lua
 - GameSetupLogic.lua
 - HostGame.lua
