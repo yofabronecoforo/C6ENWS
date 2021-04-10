@@ -1,5 +1,5 @@
 -- ###########################################################################
---	ENWS	:	Enhanced Natural Wonders Selection for Civilization VI
+--	ENWS : Enhanced Natural Wonders Selection for Civilization VI
 --	Copyright (c) 2020-2021 zzragnar0kzz
 --	All rights reserved.
 -- ###########################################################################
@@ -13,9 +13,9 @@ include("Civ6Common");
 include("SupportFunctions");
 include("PopupDialog");
 
--- ENWS : Define mod prefix for log messages
-local msgHeader = " *** ENWS: ";
-local rowOfDashes = "--------------------------------------------------------------------";
+-- ENWS : include shared components, and log entry to this module
+include("ENWS_Common.lua");
+include("ENWS_Frontend.lua");
 print(msgHeader .. "Loading modified AdvancedSetup.lua . . .");
 
 -- ===========================================================================
@@ -65,93 +65,6 @@ function HideGameSetup(func)
 	g_SimplePullDownParameterManager:ResetInstances();
 	g_SimpleSliderParameterManager:ResetInstances();
 	g_SimpleStringParameterManager:ResetInstances();
-end
-
--- ENWS : check configuration db flags for available content
-print(rowOfDashes);
-print(msgHeader .. "Checking content flags . . .");
-
-function GetContentFlag(sContent)
-	local query = "SELECT * from ContentFlags WHERE Name = ?";
-	local result = DB.ConfigurationQuery(query, sContent);
-	if result and #result > 0 then
-		print(msgHeader .. sContent .. " = true");
-		return 1;
-	else
-		return -1;
-	end
-end
-
-local dlcAztec				= GetContentFlag("DLC_AZTEC_ENABLED");
-local dlcPoland				= GetContentFlag("DLC_POLAND_ENABLED");
-local dlcVikings			= GetContentFlag("DLC_VIKINGS_ENABLED");
-local dlcAustralia			= GetContentFlag("DLC_AUSTRALIA_ENABLED");
-local dlcPersiaMacedon		= GetContentFlag("DLC_PERSIA_MACEDON_ENABLED");
-local dlcNubia				= GetContentFlag("DLC_NUBIA_ENABLED");
-local dlcKhmerIndonesia		= GetContentFlag("DLC_KHMER_INDONESIA_ENABLED");
-local xp1Content			= GetContentFlag("EXPANSION_1_ENABLED");
-local xp2Content			= GetContentFlag("EXPANSION_2_ENABLED");
-local dlcGranColombiaMaya	= GetContentFlag("DLC_GRANCOLOMBIA_MAYA_ENABLED");
-local dlcEthiopia			= GetContentFlag("DLC_ETHIOPIA_ENABLED");
-local dlcByzantiumGaul		= GetContentFlag("DLC_BYZANTIUM_GAUL_ENABLED");
-local dlcBabylon			= GetContentFlag("DLC_BABYLON_ENABLED");
-local dlcVietnamKublaiKhan	= GetContentFlag("DLC_VIETNAM_KUBLAI_KHAN_ENABLED");
-local dlcPortugal			= GetContentFlag("DLC_PORTUGAL_ENABLED");
-print(rowOfDashes);
-
--- ENWS : update button tooltip(s) to reflect available content 
-function UpdateButtonToolTip(parameterId)
-	print(" *** ENWS: ", parameterId, ": Updating button tooltip(s) . . .");
-	local availableContent = "[NEWLINE]Available content:[NEWLINE]  Standard";
-	local selectedRuleset = GameConfiguration.GetValue("RULESET");
-	if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
-		if (dlcAztec > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Aztec Civilization Pack";
-		end
-		if (dlcPoland > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Poland Civilization & Scenario Pack";
-		end
-		if (dlcVikings > 0) then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Vikings Scenario Pack";
-		end
-		if (dlcAustralia > 0 and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Australia Civilization & Scenario Pack";
-		end
-		if (dlcPersiaMacedon > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Persia and Macedon Civilization & Scenario Pack";
-		end
-		if (dlcNubia > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Nubia Civilization & Scenario Pack";
-		end
-		if (dlcKhmerIndonesia > 0 and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Khmer and Indonesia Civilization & Scenario Pack";
-		end
-		if (xp1Content > 0 and selectedRuleset ~= "RULESET_STANDARD") then
-			availableContent = availableContent .. "[NEWLINE]  Expansion: Rise and Fall";
-		end
-		if (xp2Content > 0 and selectedRuleset ~= "RULESET_STANDARD" and selectedRuleset ~= "RULESET_EXPANSION_1") then
-			availableContent = availableContent .. "[NEWLINE]  Expansion: Gathering Storm";
-		end
-		if (dlcGranColombiaMaya > 0) then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Gran Colombia and Maya Pack";
-		end
-		if (dlcEthiopia > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Ethiopia Pack";
-		end
-		if (dlcByzantiumGaul > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Byzantium & Gaul Pack";
-		end
-		if (dlcBabylon > 0 and parameterId ~= "NaturalWonders") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Babylon Pack";
-		end
-		if (dlcVietnamKublaiKhan > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Vietnam & Kublai Khan Pack";
-		end
-		if (dlcPortugal > 0 and parameterId ~= "NaturalWonders" and parameterId ~= "CityStates") then
-			availableContent = availableContent .. "[NEWLINE]  DLC: Portugal Pack";
-		end
-	end
-	return availableContent;
 end
 
 -- ===========================================================================
@@ -586,8 +499,13 @@ function CreateMultiSelectWindowDriver(o, parameter, parent)
 		LuaEvents.MultiSelectWindow_Initialize(o.Parameters[parameterId]);
 		Controls.MultiSelectWindow:SetHide(false);
 	end);
+
 	-- ENWS: Update tooltips to reflect enabled additional content
-	local buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+	local buttonToolTip = parameter.Description;
+	if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+		local selectedRuleset = GameConfiguration.GetValue("RULESET");
+		buttonToolTip = buttonToolTip .. UpdateButtonToolTip(parameterId, selectedRuleset);
+	end
 	button:SetToolTipString(buttonToolTip);
 
 	-- Store the root control, NOT the instance table.
@@ -650,7 +568,11 @@ function CreateMultiSelectWindowDriver(o, parameter, parent)
 				cache.ValueText = valueText;
 				cache.ValueAmount = valueAmount;
 				-- ENWS: Update tooltips to reflect enabled additional content and selected ruleset
-				buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+				buttonToolTip = parameter.Description;
+				if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+					local selectedRuleset = GameConfiguration.GetValue("RULESET");
+					buttonToolTip = buttonToolTip .. UpdateButtonToolTip(parameterId, selectedRuleset);
+				end
 				button:SetToolTipString(buttonToolTip);
 			end
 		end,
@@ -689,8 +611,13 @@ function CreateCityStatePickerDriver(o, parameter, parent)
 		LuaEvents.CityStatePicker_Initialize(o.Parameters[parameterId], g_GameParameters);
 		Controls.CityStatePicker:SetHide(false);
 	end);
+
 	-- ENWS: Update tooltips to reflect enabled additional content
-	local buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+	local buttonToolTip = parameter.Description;
+	if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+		local selectedRuleset = GameConfiguration.GetValue("RULESET");
+		buttonToolTip = buttonToolTip .. UpdateButtonToolTip(parameterId, selectedRuleset);
+	end
 	button:SetToolTipString(buttonToolTip);
 
 	-- Store the root control, NOT the instance table.
@@ -753,7 +680,11 @@ function CreateCityStatePickerDriver(o, parameter, parent)
 				cache.ValueText = valueText;
 				cache.ValueAmount = valueAmount;
 				-- ENWS: Update tooltips to reflect enabled additional content and selected ruleset
-				buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+				buttonToolTip = parameter.Description;
+				if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+					local selectedRuleset = GameConfiguration.GetValue("RULESET");
+					buttonToolTip = buttonToolTip .. UpdateButtonToolTip(parameterId, selectedRuleset);
+				end
 				button:SetToolTipString(buttonToolTip);
 			end
 		end,
@@ -792,8 +723,13 @@ function CreateLeaderPickerDriver(o, parameter, parent)
 		LuaEvents.LeaderPicker_Initialize(o.Parameters[parameterId], g_GameParameters);
 		Controls.LeaderPicker:SetHide(false);
 	end);
+
 	-- ENWS: Update tooltips to reflect enabled additional content
-	local buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+	local buttonToolTip = parameter.Description;
+	if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+		local selectedRuleset = GameConfiguration.GetValue("RULESET");
+		buttonToolTip = buttonToolTip .. UpdateButtonToolTip(parameterId, selectedRuleset);
+	end
 	button:SetToolTipString(buttonToolTip);
 
 	-- Store the root control, NOT the instance table.
@@ -864,7 +800,11 @@ function CreateLeaderPickerDriver(o, parameter, parent)
 				cache.ValueText = valueText;
 				cache.ValueAmount = valueAmount;
 				-- ENWS: Update tooltips to reflect enabled additional content and selected ruleset
-				buttonToolTip = parameter.Description .. UpdateButtonToolTip(parameterId);
+				buttonToolTip = parameter.Description;
+				if (parameterId == "NaturalWonders" or parameterId == "CityStates" or parameterId == "LeaderPool1" or parameterId == "LeaderPool2") then
+					local selectedRuleset = GameConfiguration.GetValue("RULESET");
+					buttonToolTip = buttonToolTip .. UpdateButtonToolTip(parameterId, selectedRuleset);
+				end
 				button:SetToolTipString(buttonToolTip);
 			end
 		end,
