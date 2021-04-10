@@ -34,7 +34,9 @@ The button text for the official Natural Wonders selector now reflects the numbe
 - This functionality extends to the built-in City-States and Random Leaders selector(s).
 
 # Compatibility
-Requires the official Natural Wonders selector, so probably won't work with builds lacking this feature.
+Definitely requires the [August 2020 Game Update](https://civilization.com/news/entries/civilization-vi-august-2020-game-update-available-now/); **will break prior builds**.
+
+Requires the [December 2020 Game Update](https://civilization.com/news/entries/civilization-vi-december-2020-game-update-available-now/) and the [February 2021 Game Update](https://civilization.com/news/entries/civilization-vi-february-2021-game-update-available-now/) for full compatibility.
 
 Works with the following rulesets:
 - Standard
