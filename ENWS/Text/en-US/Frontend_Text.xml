@@ -20,9 +20,5 @@
 		<Replace Tag="LOC_NATURAL_WONDER_COUNT_DESCRIPTION" Language="en_US">
 			<Text>The number of natural wonders that will appear on the map.</Text>
 		</Replace>
-		<!-- Natural Wonder exclusion 
-		<Replace Tag="LOC_EXCLUDE_NATURAL_WONDER_DESC" Language="en_US">
-			<Text>Choose which Natural Wonders may appear on the map.[NEWLINE]Available content:</Text>
-		</Replace>-->
     </LocalizedText>
 </GameData>
