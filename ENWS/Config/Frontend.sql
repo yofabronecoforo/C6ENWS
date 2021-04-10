@@ -1,5 +1,5 @@
 /* ###########################################################################
-    ENWS	:	Enhanced Natural Wonders Selection for Civilization VI
+    ENWS : Enhanced Natural Wonders Selection for Civilization VI
     Copyright (c) 2020-2021 zzragnar0kzz
     All rights reserved.
 ########################################################################### */
