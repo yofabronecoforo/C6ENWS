@@ -26,6 +26,10 @@ Any size map with only two, only one, or completely devoid of any, Natural Wonde
 These, and more, are now possible.
 
 ### Natural Wonders selector
+The official Natural Wonders selector now utilizes a modified version of the official City-States selector's framework; as a result of this:
+- The Natural Wonders slider is now accessible from within the Natural Wonders selector. When the selector is opened, the slider inside will reflect the value of the primary Natural Wonders slider provided in the Advanced Setup; when selections are confirmed, the primary slider will reflect the value of the selector's slider.
+- Available Natural Wonders will be displayed in two columns, and the size of each item in the list has been slightly increased compared to the default. These items are presented as is; no sorting options are available, as none are provided.
+
 The button text for the official Natural Wonders selector now reflects the number of selected NWs when all available NWs have been selected, like it does for custom selections. The tooltip text for this option now dynamically updates to reflect the source(s) of available Natural Wonders, which can vary depending on enabled additional content and the currently selected ruleset.
 - This functionality extends to the built-in City-States and Random Leaders selector(s).
 
@@ -65,5 +69,9 @@ ENWS replaces the following lua file(s):
 - GameSetupLogic.lua
 - HostGame.lua
 - NaturalWonderGenerator.lua
+
+In addition, it replaces portions of the internal MultiSelectWindow control, represented by the following file(s):
+- MultiSelectWindow.lua
+- MultiSelectWindow.xml
 
 If your mod replaces any of these files, compatibility issues **will** arise.
