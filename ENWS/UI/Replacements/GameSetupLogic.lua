@@ -1,5 +1,5 @@
 -- ###########################################################################
---	ENWS	:	Enhanced Natural Wonders Selection for Civilization VI
+--	ENWS : Enhanced Natural Wonders Selection for Civilization VI
 --	Copyright (c) 2020-2021 zzragnar0kzz
 --	All rights reserved.
 -- ###########################################################################
@@ -10,9 +10,8 @@
 include( "InstanceManager" );
 include ("SetupParameters");
 
--- ENWS : Define mod prefix for log messages
-local msgHeader = " *** ENWS: ";
-local rowOfDashes = "--------------------------------------------------------------------";
+-- ENWS : include shared components, and log entry to this module
+include("ENWS_Common.lua");
 print(msgHeader .. "Loading modified GameSetupLogic.lua . . .");
 
 -- Instance managers for dynamic game options (parent is set dynamically).
