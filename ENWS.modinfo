@@ -12,63 +12,20 @@
 	<References>
 		<Mod id="1B28771A-C749-434B-9053-D1380C553DE9" title="LOC_EXPANSION1_MOD_TITLE"/>
 		<Mod id="4873eb62-8ccc-4574-b784-dda455e74e68" title="LOC_EXPANSION2_MOD_TITLE"/>
-		<Mod id="2F6E858A-28EF-46B3-BEAC-B985E52E9BC1" title="LOC_MOD_VIKINGSLANDMARKS_TITLE"/>
-		<Mod id="9DE86512-DE1A-400D-8C0A-AB46EBBF76B9" title="LOC_GRANCOLOMBIA_MAYA_MOD_TITLE"/>
-		<!--<Mod id="1B394FE9-23DC-4868-8F0A-5220CB8FB427" title="LOC_ETHIOPIA_MOD_TITLE"/>
-		<Mod id="8424840C-92EF-4426-A9B4-B4E0CB818049" title="LOC_BABYLON_MOD_TITLE"/>-->
 	</References>
 	<ActionCriteria>
 		<Criteria id="ENWS" any="1">
 			<RuleSetInUse>RULESET_STANDARD,RULESET_EXPANSION_1,RULESET_EXPANSION_2</RuleSetInUse>
 		</Criteria>
-		<Criteria id="ENWS_Standard" any="1">
-			<RuleSetInUse>RULESET_STANDARD</RuleSetInUse>
-		</Criteria>
-		<Criteria id="ENWS_Expansion1" any="1">
-			<RuleSetInUse>RULESET_EXPANSION_1</RuleSetInUse>
-		</Criteria>
-		<Criteria id="ENWS_Expansion1AndBeyond" any="1">
-			<RuleSetInUse>RULESET_EXPANSION_1,RULESET_EXPANSION_2</RuleSetInUse>
-		</Criteria>
-		<Criteria id="ENWS_Expansion2" any="1">
-			<RuleSetInUse>RULESET_EXPANSION_2</RuleSetInUse>
-		</Criteria>
-		<Criteria id="ENWS_Vikings" any="1">
-			<ModInUse>2F6E858A-28EF-46B3-BEAC-B985E52E9BC1</ModInUse>
-		</Criteria>
-		<Criteria id="ENWS_GranColombia_Maya" any="1">
-			<ModInUse>9DE86512-DE1A-400D-8C0A-AB46EBBF76B9</ModInUse>
-		</Criteria>
-		<!--<Criteria id="ENWS_Ethiopia" any="1">
-			<ModInUse>1B394FE9-23DC-4868-8F0A-5220CB8FB427</ModInUse>
-		</Criteria>
-		<Criteria id="ENWS_Babylon" any="1">
-			<ModInUse>8424840C-92EF-4426-A9B4-B4E0CB818049</ModInUse>
-		</Criteria>-->
 	</ActionCriteria>
 	<InGameActions>
-		<ImportFiles id="ENWS_INGAME_LUA_BASE" criteria="ENWS_Standard">
+		<ImportFiles id="ENWS_INGAME_LUA" criteria="ENWS">
 			<Properties>
         		<LoadOrder>1010141</LoadOrder>
       		</Properties>
 			<Items>
-				<File>ENWS/Maps/Utility/Base/NaturalWonderGenerator.lua</File>
-			</Items>
-		</ImportFiles>
-		<ImportFiles id="ENWS_INGAME_LUA_XP1" criteria="ENWS_Expansion1">
-			<Properties>
-        		<LoadOrder>1010141</LoadOrder>
-      		</Properties>
-			<Items>
-				<File>ENWS/Maps/Utility/Expansion1/NaturalWonderGenerator.lua</File>
-			</Items>
-		</ImportFiles>
-		<ImportFiles id="ENWS_INGAME_LUA_XP2" criteria="ENWS_Expansion2">
-			<Properties>
-        		<LoadOrder>1010141</LoadOrder>
-      		</Properties>
-			<Items>
-				<File>ENWS/Maps/Utility/Expansion2/NaturalWonderGenerator.lua</File>
+				<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
+				<File>ENWS/UI/Additions/ENWS_Common.lua</File>
 			</Items>
 		</ImportFiles>
 	</InGameActions>
@@ -92,8 +49,12 @@
         		<LoadOrder>1010141</LoadOrder>
       		</Properties>
 			<Items>
+				<File>ENWS/UI/Additions/ENWS_Common.lua</File>
+				<File>ENWS/UI/Additions/ENWS_Frontend.lua</File>
 				<File>ENWS/UI/Replacements/AdvancedSetup.lua</File>
 				<File>ENWS/UI/Replacements/GameSetupLogic.lua</File>
+				<File>ENWS/UI/Replacements/MultiSelectWindow.lua</File>
+				<File>ENWS/UI/Replacements/MultiSelectWindow.xml</File>
 				<File>ENWS/UI/Replacements/Multiplayer/HostGame.lua</File>
 			</Items>
 		</ImportFiles>
@@ -127,16 +88,17 @@
 		<File>ENWS/Config/Frontend.sql</File>
 		<File>ENWS/Config/Frontend.xml</File>
 
-		<File>ENWS/Maps/Utility/Base/NaturalWonderGenerator.lua</File>
-
-		<File>ENWS/Maps/Utility/Expansion1/NaturalWonderGenerator.lua</File>
-	
-		<File>ENWS/Maps/Utility/Expansion2/NaturalWonderGenerator.lua</File>
+		<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
 
 		<File>ENWS/Text/en-US/Frontend_Text.xml</File>
-		
+
+		<File>ENWS/UI/Additions/ENWS_Common.lua</File>
+		<File>ENWS/UI/Additions/ENWS_Frontend.lua</File>
+
 		<File>ENWS/UI/Replacements/AdvancedSetup.lua</File>
 		<File>ENWS/UI/Replacements/GameSetupLogic.lua</File>
+		<File>ENWS/UI/Replacements/MultiSelectWindow.lua</File>
+		<File>ENWS/UI/Replacements/MultiSelectWindow.xml</File>
 
 		<File>ENWS/UI/Replacements/Multiplayer/HostGame.lua</File>
 	</Files>
