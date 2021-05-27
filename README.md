@@ -105,4 +105,4 @@ ENWS adds the following new Frontend context file(s):
 ENWS replaces the following Ingame script file(s):
 - NaturalWonderGenerator.lua
 
-If your mod replaces any of the abvoe existing files, or adds any similarly-named new ones, compatibility issues **will** arise.
+If your mod replaces any of the above existing files, or adds any similarly-named new ones, compatibility issues **will** arise.
