@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="1.0">
+<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="4.0">
     <Properties>
         <Name>LOC_ENWS_MOD_TITLE</Name>
         <Teaser>LOC_ENWS_MOD_TEASER</Teaser>
@@ -36,13 +36,19 @@
 				<LoadOrder>-42</LoadOrder>
 			</Properties>
 			<!-- Configuration schema changes -->
-			<File Priority="2">ENWS/Config/Schema.sql</File>
+			<File Priority="2">C6GUE/Configuration/Schema.sql</File>
+			<File Priority="2">ENWS/Configuration/Schema.sql</File>
 		</UpdateDatabase>
 		<UpdateText id="ENWS_FRONTEND_TEXT">
 			<Properties>
         		<LoadOrder>1010101</LoadOrder>
       		</Properties>
-			<File>ENWS/Text/en-US/Frontend_Text.xml</File>
+			<File>C6GUE/Localization/en_US/Common_Frontend_Text.xml</File>
+			<File>C6GUE/Localization/es_ES/Common_Frontend_Text.xml</File>
+			<File>C6GUE/Localization/fr_FR/Common_Frontend_Text.xml</File>
+			<File>ENWS/Localization/en_US/Frontend_Text.xml</File>
+			<File>ENWS/Localization/es_ES/Frontend_Text.xml</File>
+			<File>ENWS/Localization/fr_FR/Frontend_Text.xml</File>
 		</UpdateText>
 		<ImportFiles id="ENWS_FRONTEND_LUA">
 			<Properties>
@@ -51,55 +57,79 @@
 			<Items>
 				<File>ENWS/UI/Additions/ENWS_Common.lua</File>
 				<File>ENWS/UI/Additions/ENWS_Frontend.lua</File>
-				<File>ENWS/UI/Replacements/AdvancedSetup.lua</File>
-				<File>ENWS/UI/Replacements/GameSetupLogic.lua</File>
-				<File>ENWS/UI/Replacements/MultiSelectWindow.lua</File>
-				<File>ENWS/UI/Replacements/MultiSelectWindow.xml</File>
-				<File>ENWS/UI/Replacements/Multiplayer/HostGame.lua</File>
+				<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
+				<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
+				<File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
+				<File>C6GUE/UI/Replacements/AdvancedSetup.xml</File>
+				<File>C6GUE/UI/Replacements/GameSetupLogic.lua</File>
+				<File>C6GUE/UI/Replacements/Mods.lua</File>
+				<File>C6GUE/UI/Replacements/Multiplayer/HostGame.lua</File>
+				<File>C6GUE/UI/Replacements/Multiplayer/HostGame.xml</File>
 			</Items>
 		</ImportFiles>
 		<UpdateDatabase id="ENWS_FRONTEND">
 			<Properties>
         		<LoadOrder>1010171</LoadOrder>
       		</Properties>
-			<File Priority="2">ENWS/Config/Frontend.sql</File>
-			<File Priority="1">ENWS/Config/Frontend.xml</File>
+			<File Priority="2">ENWS/Configuration/Frontend.sql</File>
+			<File Priority="1">ENWS/Configuration/Frontend.xml</File>
         </UpdateDatabase>
     </FrontEndActions>
 	<LocalizedText>
 		<Text id="LOC_ENWS_MOD_TITLE">
 			<en_US>Enhanced Natural Wonders Selection</en_US>
+			<es_ES>Selección Mejorada de Maravillas Naturales</es_ES>
+			<fr_FR>Sélection Améliorée de Merveilles Naturelles</fr_FR>
 		</Text>
 		<Text id="LOC_ENWS_MOD_TEASER">
 			<en_US>Allows finer control over the number of Natural Wonders that spawn in a game.</en_US>
+			<es_ES>Permite un control más preciso sobre la cantidad de maravillas naturales que se generan en un juego.</es_ES>
+			<fr_FR>Permet un contrôle plus fin sur le nombre de merveilles naturelles qui apparaissent dans un jeu.</fr_FR>
 		</Text>
 		<Text id="LOC_ENWS_MOD_DESCRIPTION">
 			<en_US>Enables variable numbers of Natural Wonders on each built-in Map Size, ranging from zero to twice the default number for a given Map Size.[NEWLINE][NEWLINE]Provides a slider to control the number of Natural Wonders that spawn in a game.[NEWLINE][NEWLINE]Dynamically updates the tooltip text for the Natural Wonders selector to reflect the sources of available content. This change also applies to the tooltip text for the City-States and Leader Pool selectors.</en_US>
+			<es_ES>Habilita números variables de Maravillas Naturales en cada Tamaño de Mapa integrado, desde cero hasta el doble del número predeterminado para un Tamaño de Mapa dado.[NEWLINE][NEWLINE]Proporciona un control deslizante para controlar la cantidad de Maravillas Naturales que se generan en un juego.[NEWLINE][NEWLINE]Actualiza dinámicamente el texto de la información sobre herramientas del selector de Maravillas naturales para reflejar las fuentes del contenido disponible. Este cambio también se aplica al texto de información sobre herramientas para los selectores de ciudades-estado y grupo de líderes.</es_ES>
+			<fr_FR>Active un nombre variable de merveilles naturelles sur chaque taille de carte intégrée, allant de zéro à deux fois le nombre par défaut pour une taille de carte donnée.[NEWLINE][NEWLINE]Fournit un curseur pour contrôler le nombre de merveilles naturelles qui apparaissent dans un jeu.[NEWLINE][NEWLINE]Met à jour dynamiquement le texte de l'infobulle du sélecteur Natural Wonders afin de refléter les sources du contenu disponible. Cette modification s'applique également au texte de l'infobulle des sélecteurs City-States et Leader Pool.</fr_FR>
 		</Text>
 		<Text id="LOC_ENWS_MOD_AUTHORS">
 			<en_US>zzragnar0kzz</en_US>
+			<es_ES>zzragnar0kzz</es_ES>
+			<fr_FR>zzragnar0kzz</fr_FR>
 		</Text>
 		<Text id="LOC_ENWS_MOD_SPECIALTHANKS">
 			<en_US>The Community</en_US>
+			<es_ES>La Comunidad</es_ES>
+			<fr_FR>La Communauté</fr_FR>
 		</Text>
 	</LocalizedText>
 	<Files>
-		<File>ENWS/Config/Schema.sql</File>
-		<File>ENWS/Config/Frontend.sql</File>
-		<File>ENWS/Config/Frontend.xml</File>
+		<File>C6GUE/Configuration/Schema.sql</File>
+
+		<File>C6GUE/Localization/en_US/Common_Frontend_Text.xml</File>
+		<File>C6GUE/Localization/es_ES/Common_Frontend_Text.xml</File>
+		<File>C6GUE/Localization/fr_FR/Common_Frontend_Text.xml</File>
+
+		<File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
+		<File>C6GUE/UI/Replacements/AdvancedSetup.xml</File>
+		<File>C6GUE/UI/Replacements/GameSetupLogic.lua</File>
+		<File>C6GUE/UI/Replacements/Mods.lua</File>
+		
+		<File>C6GUE/UI/Replacements/Multiplayer/HostGame.lua</File>
+		<File>C6GUE/UI/Replacements/Multiplayer/HostGame.xml</File>
+
+		<File>ENWS/Configuration/Schema.sql</File>
+		<File>ENWS/Configuration/Frontend.sql</File>
+		<File>ENWS/Configuration/Frontend.xml</File>
+
+		<File>ENWS/Localization/en_US/Frontend_Text.xml</File>
+		<File>ENWS/Localization/es_ES/Frontend_Text.xml</File>
+		<File>ENWS/Localization/fr_FR/Frontend_Text.xml</File>
 
 		<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
 
-		<File>ENWS/Text/en-US/Frontend_Text.xml</File>
-
 		<File>ENWS/UI/Additions/ENWS_Common.lua</File>
 		<File>ENWS/UI/Additions/ENWS_Frontend.lua</File>
-
-		<File>ENWS/UI/Replacements/AdvancedSetup.lua</File>
-		<File>ENWS/UI/Replacements/GameSetupLogic.lua</File>
-		<File>ENWS/UI/Replacements/MultiSelectWindow.lua</File>
-		<File>ENWS/UI/Replacements/MultiSelectWindow.xml</File>
-
-		<File>ENWS/UI/Replacements/Multiplayer/HostGame.lua</File>
+		<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
+		<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
 	</Files>
 </Mod>

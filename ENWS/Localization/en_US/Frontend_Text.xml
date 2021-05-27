@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==========================================================================
+	ENWS : Enhanced Natural Wonders Selection for Civilization VI
+	Copyright (C) 2020-2021 zzragnar0kzz
+	All rights reserved
+===========================================================================-->
+<!-- localized frontend text for en_US -->
+<GameData>
+	<LocalizedText>
+		<!-- Natural Wonders slider(s) -->
+		<Replace Tag="LOC_NATURAL_WONDER_COUNT_NAME" Language="en_US">
+			<Text>Natural Wonders</Text>
+		</Replace>
+		<Replace Tag="LOC_NATURAL_WONDER_COUNT_DESCRIPTION" Language="en_US">
+			<Text>The number of natural wonders that will appear on the map.</Text>
+		</Replace>
+    </LocalizedText>
+</GameData>
