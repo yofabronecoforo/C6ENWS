@@ -1,6 +1,11 @@
 # Enhanced Natural Wonders Selection for Civilization VI
 A mod which enables variable numbers of Natural Wonders on standard map sizes.
 
+New Frontend text fully localized in the following language(s):
+- English (en_US)
+- Spanish (es_ES)
+- French (fr_FR)
+
 # Features
 ### Natural Wonders slider
 Provides a slider which allows for control over the number of Natural Wonders that spawn in a game. The range of this slider varies with the selected map size, per the table below. 
@@ -38,10 +43,32 @@ Definitely requires the [August 2020 Game Update](https://civilization.com/news/
 
 Requires the [December 2020 Game Update](https://civilization.com/news/entries/civilization-vi-december-2020-game-update-available-now/) and the [February 2021 Game Update](https://civilization.com/news/entries/civilization-vi-february-2021-game-update-available-now/) for full compatibility.
 
-Works with the following rulesets:
+## SP / MP
+Compatible with Single- and Multi-Player game setups.
+
+## Rulesets
+Compatible with the following rulesets:
 - Standard
 - Rise and Fall
 - Gathering Storm
+
+## Game Modes
+Compatible with the following game modes:
+
+* Apocalypse
+* Barbarian Clans
+* Dramatic Ages
+* Heroes & Legends
+* Monopolies and Corporations
+* Secret Societies
+
+Has not been tested with the following game modes:
+
+* Tech and Civic Shuffle
+* Zombie Defense
+
+## Mods
+Should work with other mods that add new Natural Wonder(s).
 
 # Installation
 ### Automatic
@@ -56,24 +83,26 @@ Download the [latest release](https://github.com/zzragnar0kzz/C6ENWS/releases/la
 To update to a newer release, clone or download the latest release as described above, overwriting any existing items in the destination folder.
 
 # Conflicts
-ENWS adds the following custom table(s) to the game's SQLite Configuration database:
+ENWS adds the following custom table(s) to the game's Configuration database:
 - ContentFlags
 
 If your mod uses any similarly-named custom tables, compatibility issues *may* arise.
 
-ENWS adds custom columns to the following table(s) in the game's SQLite Configuration database:
+ENWS adds custom columns to the following table(s) in the game's Configuration database:
 - MapSizes
 
-If your mod employs database customizations to any of these tables, compatibility issues *may* arise.
+If your mod employs similar database customizations to any of these tables, compatibility issues *may* arise.
 
-ENWS replaces the following lua file(s):
-- AdvancedSetup.lua
+ENWS replaces the following existing Frontend context file(s):
+- AdvancedSetup.lua and AdvancedSetup.xml
 - GameSetupLogic.lua
-- HostGame.lua
+- HostGame.lua and HostGame.xml
+- Mods.lua
+
+ENWS adds the following new Frontend context file(s):
+- NaturalWonderPicker.lua and NaturalWonderPicker.xml
+
+ENWS replaces the following Ingame script file(s):
 - NaturalWonderGenerator.lua
 
-In addition, it replaces portions of the internal MultiSelectWindow control, represented by the following file(s):
-- MultiSelectWindow.lua
-- MultiSelectWindow.xml
-
-If your mod replaces any of these files, compatibility issues **will** arise.
+If your mod replaces any of the abvoe existing files, or adds any similarly-named new ones, compatibility issues **will** arise.
