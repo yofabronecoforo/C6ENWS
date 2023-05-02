@@ -1,6 +1,6 @@
 /* ###########################################################################
     C6GUE : Gameplay and Usability Enhancements for Civilization VI
-    Copyright (c) 2020-2021 zzragnar0kzz
+    Copyright (c) 2020-2023 zzragnar0kzz
     All rights reserved.
 ########################################################################### */
 
@@ -13,13 +13,13 @@ CREATE TABLE IF NOT EXISTS 'ContentFlags' (
 	'Id' TEXT NOT NULL,
     'Name' TEXT NOT NULL,
 	'GUID' TEXT NOT NULL,
-	'CityStates' INTEGER NOT NULL DEFAULT 0,
-	'GoodyHuts' INTEGER NOT NULL DEFAULT 0,
-    'Leaders' INTEGER NOT NULL DEFAULT 0,
-	'NaturalWonders' INTEGER NOT NULL DEFAULT 0,
-    'Base' INTEGER NOT NULL DEFAULT 0,
-	'XP1' INTEGER NOT NULL DEFAULT 0,
-	'XP2' INTEGER NOT NULL DEFAULT 0,
+	'CityStates' BOOLEAN NOT NULL CHECK (CityStates IN (0,1)) DEFAULT 0,
+	'GoodyHuts' BOOLEAN NOT NULL CHECK (GoodyHuts IN (0,1)) DEFAULT 0,
+    'Leaders' BOOLEAN NOT NULL CHECK (Leaders IN (0,1)) DEFAULT 0,
+	'NaturalWonders' BOOLEAN NOT NULL CHECK (NaturalWonders IN (0,1)) DEFAULT 0,
+    'Base' BOOLEAN NOT NULL CHECK (Base IN (0,1)) DEFAULT 0,
+	'XP1' BOOLEAN NOT NULL CHECK (XP1 IN (0,1)) DEFAULT 0,
+	'XP2' BOOLEAN NOT NULL CHECK (XP2 IN (0,1)) DEFAULT 0,
 	'Tooltip' TEXT NOT NULL,
 	PRIMARY KEY('Name')
 );

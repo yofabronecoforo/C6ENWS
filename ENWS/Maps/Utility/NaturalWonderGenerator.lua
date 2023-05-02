@@ -8,16 +8,19 @@
 
 --############################################################################
 --	ENWS : Enhanced Natural Wonders Selection for Civilization VI
---	Copyright (c) 2020-2021 zzragnar0kzz
+--	Copyright (c) 2020-2023 zzragnar0kzz
 --	All rights reserved.
 --############################################################################
 
 include "MapEnums"
 
 -- ENWS : include shared components, and log entry to this module
-include("ENWS_Common.lua");
-print(msgHeader .. "Loading modified NaturalWonderGenerator.lua . . .");
-print(msgHeader .. "Selected ruleset: " .. tostring(GameConfiguration.GetValue("RULESET")));
+-- include("ENWS_Common.lua");
+print("Loading modified NaturalWonderGenerator.lua for ENWS . . .");
+print("Selected ruleset: " .. tostring(GameConfiguration.GetValue("RULESET")));
+
+msgHeader = "[ ENWS ] ";
+rowOfDashes = "--------------------------------------------------------------------";
 
 ------------------------------------------------------------------------------
 NaturalWonderGenerator = {};

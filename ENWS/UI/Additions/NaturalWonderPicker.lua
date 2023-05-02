@@ -1,6 +1,6 @@
 -- ###########################################################################
 --	ENWS : Enhanced Natural Wonders Selection for Civilization VI
---	Copyright (c) 2020-2021 zzragnar0kzz
+--	Copyright (c) 2020-2023 zzragnar0kzz
 --	All rights reserved.
 -- ###########################################################################
 
@@ -13,8 +13,8 @@
 include("InstanceManager");
 
 -- ENWS : include shared components, and log entry to this module
-include("ENWS_Common.lua");
-print(msgHeader .. "Loading NaturalWonderPicker.lua . . .");
+-- include("ENWS_Common.lua");
+print("Loading NaturalWonderPicker.lua . . .");
 
 -- ===========================================================================
 -- Members

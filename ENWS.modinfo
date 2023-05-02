@@ -25,8 +25,18 @@
       		</Properties>
 			<Items>
 				<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
-				<File>ENWS/UI/Additions/ENWS_Common.lua</File>
+				<!-- <File>ENWS/UI/Additions/ENWS_Common.lua</File> -->
 			</Items>
+		</ImportFiles>
+		<!-- ENWS additional script(s) for YnAMP compatibility -->
+		<ImportFiles id="ENWS_YNAMP_LOAD_DATABASE" criteria="ENWS">
+			<Properties>
+        		<LoadOrder>1010142</LoadOrder>
+      		</Properties>
+			<File>C6GUE/UI/Additions/CommonFrontend.lua</File>
+			<File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File>
+			<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
+			<File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File>
 		</ImportFiles>
 	</InGameActions>
 	<FrontEndActions>
@@ -55,16 +65,25 @@
         		<LoadOrder>1010141</LoadOrder>
       		</Properties>
 			<Items>
-				<File>ENWS/UI/Additions/ENWS_Common.lua</File>
-				<File>ENWS/UI/Additions/ENWS_Frontend.lua</File>
+				<!-- <File>ENWS/UI/Additions/ENWS_Common.lua</File>
+				<File>ENWS/UI/Additions/ENWS_Frontend.lua</File> -->
 				<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
 				<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
-				<File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
+				<File>C6GUE/UI/Additions/CommonFrontend.lua</File>
+				<File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File>
+				<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.lua</File>
+				<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.xml</File>
+				<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
+				<!-- <File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
 				<File>C6GUE/UI/Replacements/AdvancedSetup.xml</File>
 				<File>C6GUE/UI/Replacements/GameSetupLogic.lua</File>
 				<File>C6GUE/UI/Replacements/Mods.lua</File>
 				<File>C6GUE/UI/Replacements/Multiplayer/HostGame.lua</File>
-				<File>C6GUE/UI/Replacements/Multiplayer/HostGame.xml</File>
+				<File>C6GUE/UI/Replacements/Multiplayer/HostGame.xml</File> -->
+				<File>C6GUE/UI/Replacements/MainMenu.xml</File>
+				<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.lua</File>
+				<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.xml</File>
+				<File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File>
 			</Items>
 		</ImportFiles>
 		<UpdateDatabase id="ENWS_FRONTEND">
@@ -109,13 +128,13 @@
 		<File>C6GUE/Localization/es_ES/Common_Frontend_Text.xml</File>
 		<File>C6GUE/Localization/fr_FR/Common_Frontend_Text.xml</File>
 
-		<File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
+		<!-- <File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
 		<File>C6GUE/UI/Replacements/AdvancedSetup.xml</File>
 		<File>C6GUE/UI/Replacements/GameSetupLogic.lua</File>
-		<File>C6GUE/UI/Replacements/Mods.lua</File>
+		<File>C6GUE/UI/Replacements/Mods.lua</File> -->
 		
-		<File>C6GUE/UI/Replacements/Multiplayer/HostGame.lua</File>
-		<File>C6GUE/UI/Replacements/Multiplayer/HostGame.xml</File>
+		<!-- <File>C6GUE/UI/Replacements/Multiplayer/HostGame.lua</File>
+		<File>C6GUE/UI/Replacements/Multiplayer/HostGame.xml</File> -->
 
 		<File>ENWS/Configuration/Schema.sql</File>
 		<File>ENWS/Configuration/Frontend.sql</File>
@@ -127,9 +146,18 @@
 
 		<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
 
-		<File>ENWS/UI/Additions/ENWS_Common.lua</File>
-		<File>ENWS/UI/Additions/ENWS_Frontend.lua</File>
+		<!-- <File>ENWS/UI/Additions/ENWS_Common.lua</File>
+		<File>ENWS/UI/Additions/ENWS_Frontend.lua</File> -->
 		<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
 		<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
+		<File>C6GUE/UI/Additions/CommonFrontend.lua</File>
+		<File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File>
+		<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.lua</File>
+		<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.xml</File>
+		<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
+		<File>C6GUE/UI/Replacements/MainMenu.xml</File>
+		<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.lua</File>
+		<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.xml</File>
+		<File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File>
 	</Files>
 </Mod>
