@@ -76,7 +76,7 @@ ENWS is compatible with mods that replace the AdvancedSetup, GameSetupLogic, and
 
 # Installation
 ### Automatic
-ENWS is [Steam Workshop item 2273495829](https://steamcommunity.com/sharedfiles/filedetails/?id=2273495829). Subscribe to automatically download and install the latest release, and to automatically receive any updates as they are published to the Workshop.
+[Subscribe to ENWS in the Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2273495829) to automatically download and install the latest published release, and to automatically receive any updates as they are published to the Workshop.
 
 ### Manual
 Download the [latest release](https://github.com/zzragnar0kzz/C6ENWS/releases/latest) and extract it into the game's local mods folder. Alternately, clone the repository into the game's local mods folder using your preferred tools. The local mods folder varies:
