@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="4.0">
+<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="6.0">
     <Properties>
         <Name>LOC_ENWS_MOD_TITLE</Name>
         <Teaser>LOC_ENWS_MOD_TEASER</Teaser>
@@ -49,6 +49,16 @@
 			<File Priority="2">C6GUE/Configuration/Schema.sql</File>
 			<File Priority="2">ENWS/Configuration/Schema.sql</File>
 		</UpdateDatabase>
+		<ImportFiles id="ENWS_FRONTEND_EGHV_DUMMY_FILE">
+			<!-- this needs to load before the script loaded by EGHV -->
+			<Properties>
+        		<LoadOrder>10101</LoadOrder>
+      		</Properties>
+			<Items>
+				<!-- dummy file to prevent lua log errors when EGHV is not present and enabled -->
+				<File>ENWS/UI/Additions/GoodyHutPicker.lua</File>
+			</Items>
+		</ImportFiles>
 		<UpdateText id="ENWS_FRONTEND_TEXT">
 			<Properties>
         		<LoadOrder>1010101</LoadOrder>
@@ -148,6 +158,9 @@
 
 		<!-- <File>ENWS/UI/Additions/ENWS_Common.lua</File>
 		<File>ENWS/UI/Additions/ENWS_Frontend.lua</File> -->
+		<!-- dummy file to prevent lua log errors when EGHV is not present and enabled -->
+		<File>ENWS/UI/Additions/GoodyHutPicker.lua</File>
+		<!-- frontend - natural wonder picker -->
 		<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
 		<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
 		<File>C6GUE/UI/Additions/CommonFrontend.lua</File>
