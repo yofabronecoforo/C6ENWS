@@ -14,30 +14,20 @@
 
 include "MapEnums"
 
--- ENWS : include shared components, and log entry to this module
--- include("ENWS_Common.lua");
 print("Loading modified NaturalWonderGenerator.lua for ENWS . . .");
 print("Selected ruleset: " .. tostring(GameConfiguration.GetValue("RULESET")));
 
-msgHeader = "[ ENWS ] ";
 rowOfDashes = "--------------------------------------------------------------------";
 
 ------------------------------------------------------------------------------
 NaturalWonderGenerator = {};
 ------------------------------------------------------------------------------
 function NaturalWonderGenerator.Create(args)
-
-	-- ENWS : Set the number of Natural Wonder(s) to generate.
-	-- ENWS : This will be equal to the value selected with the slider.
+	local sFunc = "Create():";
+	local tempSliderCount = GameConfiguration.GetValue("NATURAL_WONDER_COUNT");    -- slider value at game start
+	local iNumToPlace = (tempSliderCount ~= nil and tempSliderCount ~= args.numberToPlace) and tempSliderCount or args.numberToPlace;
 	print(rowOfDashes);
-	print(msgHeader .. "In NaturalWonderGenerator.Create()");
-	print(rowOfDashes);
-	local tempSliderCount = GameConfiguration.GetValue("NATURAL_WONDER_COUNT");
-	if (tempSliderCount ~= nil and tempSliderCount ~= args.numberToPlace) then
-		print (msgHeader .. "Attempting to place " .. tostring(tempSliderCount) .. " Natural Wonder(s) . . .");
-	else
-		print (msgHeader .. "Attempting to place " .. tostring(args.numberToPlace) .. " Natural Wonder(s) . . .");
-	end
+	print("[ENWS]: Entering NaturalWonderGenerator.Create()");
 	print(rowOfDashes);
 
 	-- create instance data
@@ -51,50 +41,71 @@ function NaturalWonderGenerator.Create(args)
 		__ScorePlots		= NaturalWonderGenerator.__ScorePlots,
 
 		-- data
-		iNumWondersToPlace  = args.numberToPlace;
-		aInvalid = args.Invalid or {};
-		iNumWondersInDB     = 0;
-		eFeatureType		= {},
-		aaPossibleLocs		= {},
-		aSelectedWonders    = {},
-		aPlacedWonders      = {},
+		-- iNumWondersToPlace     = args.numberToPlace,
+		iNumWondersToPlace     = iNumToPlace,           -- this will be the slider value at game start if it is NOT the default value for the selected map size, or the default value if it is
+		aInvalid               = args.Invalid or {},
+		iNumWondersInDB        = 0;
+		eFeatureType		   = {},
+		aaPossibleLocs		   = {},
+		aSelectedWonders       = {},
+		aPlacedWonders         = {},
 		aInvalidNaturalWonders = {},
 
-		-- ENWS : data
-		iSliderCount		= GameConfiguration.GetValue("NATURAL_WONDER_COUNT");
+		-- ENWS data
+		aExcludedFeatures      = {},    -- contains excluded Natural Wonders; keys are indices in GameInfo.Features, values are true
+		aPriorityFeatures      = {},    -- contains prioritized Natural Wonders; keys are indices in GameInfo.Features, values are true
+		aPriorityWonders       = {},    -- values are tables of Natural Wonder info used by __PlaceWonders()
 	};
 
 	-- initialize instance data
-	instance:__InitNWData()
+	instance:__InitNWData();
 	
 	-- scan the map for valid spots
 	instance:__FindValidLocs();
 
+	-- try to place items on the map in the "best" spot for each
 	instance:__PlaceWonders();
 	
+	print("[ENWS]: Exiting NaturalWonderGenerator.Create()");
+	print(rowOfDashes);
 	return instance;
 end
 ------------------------------------------------------------------------------
 function NaturalWonderGenerator:__InitNWData()
+	local sFunc = "__InitNWData():";
 	local iCount = 0;
 	local iNonNW = 0;
 
-	local excludedWonders = {};
+	-- ENWS: get excluded Natural Wonders
 	local excludeWondersConfig = GameConfiguration.GetValue("EXCLUDE_NATURAL_WONDERS");
-	-- ENWS : Get excluded Natural Wonder(s)
-	if(excludeWondersConfig and #excludeWondersConfig > 0) then
-		print(msgHeader .. #excludeWondersConfig .. " Natural Wonder(s) marked as 'excluded':");
-		for i,v in ipairs(excludeWondersConfig) do
-			print("  * " .. v);
-			excludedWonders[v] = true;
+	local bWondersExcluded = (excludeWondersConfig and #excludeWondersConfig > 0);
+	local iWondersExcluded = bWondersExcluded and #excludeWondersConfig or 0;
+	print(string.format("[i]: %s %d Natural %s been marked as 'excluded'", sFunc, iWondersExcluded, (iWondersExcluded ~= 1) and "Wonders have" or "Wonder has"));
+	if bWondersExcluded then 
+		for i,v in ipairs(excludeWondersConfig) do 
+			local iFeatureIndex = GameInfo.Features[v].Index;
+			local sFeatureName = Locale.Lookup(GameInfo.Features[v].Name);
+			self.aExcludedFeatures[iFeatureIndex] = true;
+			print(string.format("[-]: Feature ID %d (%s) will not be considered", iFeatureIndex, sFeatureName));
 		end
-	else
-		print(msgHeader .. "No Natural Wonders have been marked as 'excluded'.");
 	end
-	print(rowOfDashes);
 
-	for loop in GameInfo.Features() do
-		if(loop.NaturalWonder and excludedWonders[loop.FeatureType] ~= true) then
+	-- ENWS: get priority Natural Wonders
+	local priorityWondersConfig = GameConfiguration.GetValue("PRIORITY_NATURAL_WONDERS");
+	local bWondersPrioritized = (priorityWondersConfig and #priorityWondersConfig > 0);
+	local iWondersPrioritized = bWondersPrioritized and #priorityWondersConfig or 0;
+	-- print(string.format("[i]: %s %d Natural %s been marked as prioritized", sFunc, iWondersPrioritized, (iWondersPrioritized ~= 1) and "Wonders have" or "Wonder has"));
+	if bWondersPrioritized then 
+		for i,v in ipairs(priorityWondersConfig) do 
+			local iFeatureIndex = GameInfo.Features[v].Index;
+			if not self.aExcludedFeatures[iFeatureIndex] then 
+				self.aPriorityFeatures[iFeatureIndex] = true;
+			end
+		end
+	end
+
+	for loop in GameInfo.Features() do 
+		if(loop.NaturalWonder and not self.aExcludedFeatures[loop.Index]) then 
 			self.eFeatureType[iCount] = loop.Index;
 			self.aaPossibleLocs[iCount] = {};
 			iCount = iCount + 1;
@@ -104,6 +115,8 @@ function NaturalWonderGenerator:__InitNWData()
 
 	self.iNumWondersInDB = iCount;
 	iNonNW = iNonNW - iCount;
+	print(string.format("[i]: %s Up to %d Natural %s will be considered for placement; up to %d of these will receive priority consideration", sFunc, iCount, (iCount ~= 1) and "Wonders" or "Wonder", iWondersPrioritized));
+	print(rowOfDashes);
 	
 	local iJ = 1;
 	for iI = 0, self.iNumWondersInDB - 1 do
@@ -117,6 +130,7 @@ function NaturalWonderGenerator:__InitNWData()
 end
 ------------------------------------------------------------------------------
 function NaturalWonderGenerator:__FindValidLocs()
+	local sFunc = "__FindValidLocs():";
 
 	local iW, iH;
 	iW, iH = Map.GetGridSize();
@@ -150,31 +164,47 @@ function NaturalWonderGenerator:__FindValidLocs()
 
 	for iI = 0, self.iNumWondersInDB - 1 do
 		local iNumEntries = #self.aaPossibleLocs[iI];
-		print ("Feature Type: " .. tostring(self.eFeatureType[iI]) .. ", Valid Hexes: " .. tostring(iNumEntries));
-		if (iNumEntries > 0) then
+		local iFeatureIndex = self.eFeatureType[iI];
+		local sThisFeature = string.format("Feature ID %d (%s)", iFeatureIndex, Locale.Lookup(GameInfo.Features[iFeatureIndex].Name));
+		if (iNumEntries > 0) then 
+			local sValidLocations = string.format("%d possible valid %s", iNumEntries, (iNumEntries ~= 1) and "locations" or "location");
 			selectionRow = {}
 			selectionRow.NWIndex = iI;
 			selectionRow.RandomScore = TerrainBuilder.GetRandomNumber (100, "Natural Wonder Selection Roll");
-			table.insert (self.aSelectedWonders, selectionRow);
+			-- table.insert (self.aSelectedWonders, selectionRow);
+			if self.aExcludedFeatures[iFeatureIndex] then    -- this should never fire
+				print(string.format("[-]: %s %s has been 'excluded' from placement and will not be considered", sFunc, sThisFeature));
+			elseif self.aPriorityFeatures[iFeatureIndex] then 
+				print(string.format("[+]: %s %s has %s; this Natural Wonder has been selected for priority placement", sFunc, sThisFeature, sValidLocations));
+				table.insert (self.aPriorityWonders, selectionRow);
+			else 
+				print(string.format("[+]: %s %s has %s", sFunc, sThisFeature, sValidLocations));
+				table.insert (self.aSelectedWonders, selectionRow);
+			end
+		else 
+			print(string.format("[i]: %s %s has been selected for %splacement but will not be considered because there are no valid locations in which to place it", sFunc, sThisFeature, self.aPriorityFeatures[iFeatureIndex] and "priority " or ""));
 		end
 	end
+	table.sort(self.aPriorityWonders, function(a, b) return a.RandomScore > b.RandomScore; end);
 	table.sort(self.aSelectedWonders, function(a, b) return a.RandomScore > b.RandomScore; end);
 
 	-- Debug output
-	print ("Num wonders with valid location: " .. tostring(#self.aSelectedWonders));
+	print(string.format("[i]: %s Number of Natural Wonders with valid locations: %d", sFunc, (#self.aPriorityWonders + #self.aSelectedWonders)));
+	print(rowOfDashes);
 end
 ------------------------------------------------------------------------------
 function NaturalWonderGenerator:__PlaceWonders()
+	local sFunc = "__PlaceWonders():";
 	local j = 1;
 
-	-- ENWS : 
-	if (self.iSliderCount ~= nil and self.iSliderCount ~= self.iNumWondersToPlace) then
-		self.iNumWondersToPlace = self.iSliderCount;
-	end
+	print(string.format("[i]: %s Attempting to place %d Natural %s . . .", sFunc, self.iNumWondersToPlace, (self.iNumWondersToPlace ~= 1) and "Wonders" or "Wonder"));
 
-    for i, selectionRow in ipairs(self.aSelectedWonders) do
-		if (j <= self.iNumWondersToPlace) then
-			print (" Selected Wonder = " .. tostring(selectionRow.NWIndex) .. ", Random Score = ", tostring(selectionRow.RandomScore));
+	-- attempt to place priority selections first, up to the number of such selections or iNumWondersToPlace, whichever is smaller
+	for i, selectionRow in ipairs(self.aPriorityWonders) do 
+		if (j <= self.iNumWondersToPlace) then 
+			local eFeatureType = self.eFeatureType[selectionRow.NWIndex];
+			local sFeatureName = Locale.Lookup(GameInfo.Features[eFeatureType].Name);
+			print(string.format("[i]: %s Priority Natural Wonder: ID = %s (%d), Random Score = %d", sFunc, sFeatureName, eFeatureType, selectionRow.RandomScore));
 
 			-- Score possible locations
 			self:__ScorePlots(selectionRow.NWIndex);
@@ -185,7 +215,6 @@ function NaturalWonderGenerator:__PlaceWonders()
 
 			-- Place at this location
 			local pPlot = Map.GetPlotByIndex(iMapIndex);
-			local eFeatureType = self.eFeatureType[selectionRow.NWIndex]
 			if(TerrainBuilder.CanHaveFeature(pPlot, eFeatureType)) then
 				local customPlacement = GameInfo.Features[eFeatureType].CustomPlacement;
 				if (customPlacement == nil) then
@@ -209,17 +238,66 @@ function NaturalWonderGenerator:__PlaceWonders()
 				else
 					CustomSetFeatureType(pPlot, eFeatureType);
 				end
-				print (" Set Wonder with Feature ID of " .. tostring(eFeatureType) .. " at location (" .. tostring(pPlot:GetX()) .. ", " .. tostring(pPlot:GetY()) .. ")");
+				print(string.format("[+]: %s Placed Natural Wonder with ID %d (%s) at location (x %d, y %d)", sFunc, eFeatureType, sFeatureName, pPlot:GetX(), pPlot:GetY()));
 				table.insert (self.aPlacedWonders, iMapIndex);
-				j = j+ 1;
+				j = j + 1;
+			else 
+				print(string.format("[-]: %s 'FAILED' to place Natural Wonder with ID %d (%s)", sFunc, eFeatureType, sFeatureName));
+			end
+		end
+	end
+
+    -- if fewer than iNumWondersToPlace priority selections were placed, attempt to place non-priority selections until the sum of such selections and priority selections equals iNumWondersToPlace
+	for i, selectionRow in ipairs(self.aSelectedWonders) do 
+		if (j <= self.iNumWondersToPlace) then 
+			local eFeatureType = self.eFeatureType[selectionRow.NWIndex];
+			local sFeatureName = Locale.Lookup(GameInfo.Features[eFeatureType].Name);
+			print(string.format("[i]: %s Selected Natural Wonder: ID = %s (%d), Random Score = %d", sFunc, sFeatureName, eFeatureType, selectionRow.RandomScore));
+
+			-- Score possible locations
+			self:__ScorePlots(selectionRow.NWIndex);
+
+			-- Sort and take best score
+			table.sort (self.aaPossibleLocs[selectionRow.NWIndex], function(a, b) return a.Score > b.Score; end);
+			local iMapIndex = self.aaPossibleLocs[selectionRow.NWIndex][1].MapIndex;
+
+			-- Place at this location
+			local pPlot = Map.GetPlotByIndex(iMapIndex);
+			if(TerrainBuilder.CanHaveFeature(pPlot, eFeatureType)) then
+				local customPlacement = GameInfo.Features[eFeatureType].CustomPlacement;
+				if (customPlacement == nil) then
+					TerrainBuilder.SetFeatureType(pPlot, eFeatureType);
+
+					ResetTerrain(pPlot:GetIndex());
+
+					local plotX = pPlot:GetX();
+					local plotY = pPlot:GetY();
+
+					for dx = -2, 2 do
+						for dy = -2,2 do
+							local otherPlot = Map.GetPlotXY(plotX, plotY, dx, dy, 2);
+							if(otherPlot) then
+								if(otherPlot:IsNaturalWonder() == true) then
+									ResetTerrain(otherPlot:GetIndex());
+								end
+							end
+						end
+					end
+				else
+					CustomSetFeatureType(pPlot, eFeatureType);
+				end
+				print(string.format("[+]: %s Placed Natural Wonder with ID %d (%s) at location (x %d, y %d)", sFunc, eFeatureType, sFeatureName, pPlot:GetX(), pPlot:GetY()));
+				table.insert (self.aPlacedWonders, iMapIndex);
+				j = j + 1;
+			else 
+				print(string.format("[-]: %s 'FAILED' to place Natural Wonder with ID %d (%s)", sFunc, eFeatureType, sFeatureName));
 			end
 		end
 	end
 
 	-- ENWS
 	local numPlacedWonders = j - 1;
-	print(rowOfDashes);
-	print(msgHeader .. "Successfully placed " .. tostring(numPlacedWonders) .. " Natural Wonder(s).");
+	print(string.format("[i]: %s Successfully placed %d Natural %s", sFunc, numPlacedWonders, (numPlacedWonders ~= 1) and "Wonders" or "Wonder"));
 	print(rowOfDashes);
 
 end

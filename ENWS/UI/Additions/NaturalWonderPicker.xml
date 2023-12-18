@@ -20,7 +20,7 @@
 
 			<!-- Screen description -->
 			<Stack Anchor="C,T" Offset="0,5" StackGrowth="Down" StackPadding="2">
-				<Label ID="TopDescription" Anchor="C,T" Style="BlueGlow" WrapWidth="620"/>
+				<Label ID="TopDescription" Anchor="C,T" Style="BlueGlow" WrapWidth="992"/>
 
         <!-- Natural Wonder Count -->
         <Stack Anchor="C,T" StackGrowth="Right" StackPadding="40">
@@ -77,9 +77,14 @@
 		</Grid>
 
 		<Stack ID="ButtonStack" Anchor="C,B" Padding="20" StackGrowth="Right">
-			<GridButton ID="SelectAllButton" Size="320,45"  Style="MainButton" Anchor="C,B" String="LOC_SELECT_ALL" />
-			<GridButton ID="SelectNoneButton" Size="320,45" Style="MainButton" Anchor="C,B" String="LOC_SELECT_NONE" />
-			<GridButton ID="ConfirmButton" Size="320,45" Style="ButtonConfirm" Anchor="C,B" String="LOC_OK_BUTTON" />
+			<!-- <GridButton ID="SelectAllButton" Size="320,45"  Style="MainButton" Anchor="C,B" String="LOC_SELECT_ALL" /> -->
+			<!-- <GridButton ID="SelectNoneButton" Size="320,45" Style="MainButton" Anchor="C,B" String="LOC_SELECT_NONE" /> -->
+			<!-- <GridButton ID="ConfirmButton" Size="320,45" Style="ButtonConfirm" Anchor="C,B" String="LOC_OK_BUTTON" /> -->
+			<GridButton ID="SelectAllButton" Size="240,45"  Style="MainButton" Anchor="C,B" String="LOC_SELECT_ALL" />
+			<GridButton ID="SelectNoneButton" Size="240,45" Style="MainButton" Anchor="C,B" String="LOC_SELECT_NONE" />
+			<!-- <GridButton ID="PrioritizeAllButton" Size="192,45"  Style="MainButton" Anchor="C,B" String="LOC_PRIORITIZE_ALL" /> -->
+			<GridButton ID="PrioritizeNoneButton" Size="240,45" Style="MainButton" Anchor="C,B" String="LOC_PRIORITIZE_NONE" />
+			<GridButton ID="ConfirmButton" Size="240,45" Style="ButtonConfirm" Anchor="C,B" String="LOC_OK_BUTTON" />
 		</Stack>
 	</Container>
 
@@ -88,6 +93,7 @@
 	<Instance Name="ItemInstance">
 		<GridButton ID="Button" Anchor="C,T" Size="300,60" Texture="Controls_ButtonControl.dds" SliceCorner="10,10" SliceSize="1,1" SliceTextureSize="24,24" StateOffsetIncrement="0,24">
 			<CheckBox ID="Selected" Style="MainMenuCheck" Anchor="L,C" Offset="15,0" TextOffset="-5,0" IsChecked="0"/>
+			<CheckBox ID="Priority" Style="MainMenuCheck" Anchor="R,C" Offset="15,0" TextOffset="-5,0" IsChecked="0"/>
       <Image ID="IconBacking" Anchor="L,C" Offset="40,0" Size="44,44" Texture="CircleBacking44" NoStateChange="1">
         <Image Anchor="C,C" Size="44,44" Texture="Circle44_Darker" Color="0,0,0,50"/>
         <Image Anchor="C,C" Size="44,44" Texture="Circle44_Lighter" Color="255,255,255,100" />

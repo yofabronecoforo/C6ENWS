@@ -132,8 +132,8 @@ end
 --[[ =========================================================================
 	OVERRIDE: exclude Goody Huts and call original HostGame()
 =========================================================================== ]]
-function HostGame()
-    ExcludeGoodyHuts();
+function HostGame() 
+    if bEGHV_IsEnabled then ExcludeGoodyHuts(); end
     BASE_HostGame();
 end
 
