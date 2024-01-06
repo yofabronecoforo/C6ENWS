@@ -13,6 +13,9 @@
 		<Mod id="1B28771A-C749-434B-9053-D1380C553DE9" title="LOC_EXPANSION1_MOD_TITLE"/>
 		<Mod id="4873eb62-8ccc-4574-b784-dda455e74e68" title="LOC_EXPANSION2_MOD_TITLE"/>
 	</References>
+	<Dependencies>
+		<Mod id="29dfeca5-042a-4259-853d-61f554851af7" title="Enhanced Community FrontEnd"/>
+	</Dependencies>
 	<Blocks>
 		<Mod id="14393f83-3f48-4b36-9821-dfc21d3eb229" title="Select Natural Wonders++"/>
 	</Blocks>
@@ -24,7 +27,7 @@
 	<InGameActions>
 		<ImportFiles id="ENWS_INGAME_LUA" criteria="ENWS">
 			<Properties>
-        		<LoadOrder>1010141</LoadOrder>
+        		<LoadOrder>2000000</LoadOrder>
       		</Properties>
 			<Items>
 				<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
@@ -34,58 +37,58 @@
 		<!-- ENWS additional script(s) for YnAMP compatibility -->
 		<ImportFiles id="ENWS_YNAMP_LOAD_DATABASE" criteria="ENWS">
 			<Properties>
-        		<LoadOrder>1010142</LoadOrder>
+        		<LoadOrder>2000001</LoadOrder>
       		</Properties>
-			<File>C6GUE/UI/Additions/CommonFrontend.lua</File>
-			<File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File>
+			<!-- <File>C6GUE/UI/Additions/CommonFrontend.lua</File> -->
+			<!-- <File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File> -->
 			<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
-			<File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File>
+			<!-- <File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File> -->
 		</ImportFiles>
 	</InGameActions>
 	<FrontEndActions>
 		<UpdateDatabase id="ENWS_CONFIGURATION_SCHEMA">
 			<!-- This needs to load RFE -->
 			<Properties>
-				<LoadOrder>-42</LoadOrder>
+				<LoadOrder>-52</LoadOrder>
 			</Properties>
 			<!-- Configuration schema changes -->
-			<File Priority="2">C6GUE/Configuration/Schema.sql</File>
+			<!-- <File Priority="2">C6GUE/Configuration/Schema.sql</File> -->
 			<File Priority="2">ENWS/Configuration/Schema.sql</File>
 		</UpdateDatabase>
-		<ImportFiles id="ENWS_FRONTEND_EGHV_DUMMY_FILE">
+		<!-- <ImportFiles id="ENWS_FRONTEND_EGHV_DUMMY_FILE"> -->
 			<!-- this needs to load before the script loaded by EGHV -->
-			<Properties>
-        		<LoadOrder>10101</LoadOrder>
-      		</Properties>
-			<Items>
+			<!-- <Properties> -->
+        		<!-- <LoadOrder>10101</LoadOrder> -->
+      		<!-- </Properties> -->
+			<!-- <Items> -->
 				<!-- dummy file to prevent lua log errors when EGHV is not present and enabled -->
-				<File>ENWS/UI/Additions/GoodyHutPicker.lua</File>
-			</Items>
-		</ImportFiles>
+				<!-- <File>ENWS/UI/Additions/GoodyHutPicker.lua</File> -->
+			<!-- </Items> -->
+		<!-- </ImportFiles> -->
 		<UpdateText id="ENWS_FRONTEND_TEXT">
 			<Properties>
-        		<LoadOrder>1010101</LoadOrder>
+        		<LoadOrder>2000000</LoadOrder>
       		</Properties>
-			<File>C6GUE/Localization/en_US/Common_Frontend_Text.xml</File>
-			<File>C6GUE/Localization/es_ES/Common_Frontend_Text.xml</File>
-			<File>C6GUE/Localization/fr_FR/Common_Frontend_Text.xml</File>
+			<!-- <File>C6GUE/Localization/en_US/Common_Frontend_Text.xml</File> -->
+			<!-- <File>C6GUE/Localization/es_ES/Common_Frontend_Text.xml</File> -->
+			<!-- <File>C6GUE/Localization/fr_FR/Common_Frontend_Text.xml</File> -->
 			<File>ENWS/Localization/en_US/Frontend_Text.xml</File>
 			<File>ENWS/Localization/es_ES/Frontend_Text.xml</File>
 			<File>ENWS/Localization/fr_FR/Frontend_Text.xml</File>
 		</UpdateText>
 		<ImportFiles id="ENWS_FRONTEND_LUA">
 			<Properties>
-        		<LoadOrder>1010141</LoadOrder>
+        		<LoadOrder>2000001</LoadOrder>
       		</Properties>
 			<Items>
 				<!-- <File>ENWS/UI/Additions/ENWS_Common.lua</File>
 				<File>ENWS/UI/Additions/ENWS_Frontend.lua</File> -->
 				<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
 				<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
-				<File>C6GUE/UI/Additions/CommonFrontend.lua</File>
-				<File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File>
-				<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.lua</File>
-				<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.xml</File>
+				<!-- <File>C6GUE/UI/Additions/CommonFrontend.lua</File> -->
+				<!-- <File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File> -->
+				<!-- <File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.lua</File> -->
+				<!-- <File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.xml</File> -->
 				<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
 				<!-- <File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
 				<File>C6GUE/UI/Replacements/AdvancedSetup.xml</File>
@@ -93,15 +96,15 @@
 				<File>C6GUE/UI/Replacements/Mods.lua</File>
 				<File>C6GUE/UI/Replacements/Multiplayer/HostGame.lua</File>
 				<File>C6GUE/UI/Replacements/Multiplayer/HostGame.xml</File> -->
-				<File>C6GUE/UI/Replacements/MainMenu.xml</File>
-				<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.lua</File>
-				<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.xml</File>
-				<File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File>
+				<!-- <File>C6GUE/UI/Replacements/MainMenu.xml</File> -->
+				<!-- <File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.lua</File> -->
+				<!-- <File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.xml</File> -->
+				<!-- <File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File> -->
 			</Items>
 		</ImportFiles>
 		<UpdateDatabase id="ENWS_FRONTEND">
 			<Properties>
-        		<LoadOrder>1010171</LoadOrder>
+        		<LoadOrder>2000002</LoadOrder>
       		</Properties>
 			<File Priority="2">ENWS/Configuration/Frontend.sql</File>
 			<File Priority="1">ENWS/Configuration/Frontend.xml</File>
@@ -135,11 +138,11 @@
 		</Text>
 	</LocalizedText>
 	<Files>
-		<File>C6GUE/Configuration/Schema.sql</File>
+		<!-- <File>C6GUE/Configuration/Schema.sql</File> -->
 
-		<File>C6GUE/Localization/en_US/Common_Frontend_Text.xml</File>
-		<File>C6GUE/Localization/es_ES/Common_Frontend_Text.xml</File>
-		<File>C6GUE/Localization/fr_FR/Common_Frontend_Text.xml</File>
+		<!-- <File>C6GUE/Localization/en_US/Common_Frontend_Text.xml</File> -->
+		<!-- <File>C6GUE/Localization/es_ES/Common_Frontend_Text.xml</File> -->
+		<!-- <File>C6GUE/Localization/fr_FR/Common_Frontend_Text.xml</File> -->
 
 		<!-- <File>C6GUE/UI/Replacements/AdvancedSetup.lua</File>
 		<File>C6GUE/UI/Replacements/AdvancedSetup.xml</File>
@@ -162,18 +165,18 @@
 		<!-- <File>ENWS/UI/Additions/ENWS_Common.lua</File>
 		<File>ENWS/UI/Additions/ENWS_Frontend.lua</File> -->
 		<!-- dummy file to prevent lua log errors when EGHV is not present and enabled -->
-		<File>ENWS/UI/Additions/GoodyHutPicker.lua</File>
+		<!-- <File>ENWS/UI/Additions/GoodyHutPicker.lua</File> -->
 		<!-- frontend - natural wonder picker -->
 		<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
 		<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
-		<File>C6GUE/UI/Additions/CommonFrontend.lua</File>
-		<File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File>
-		<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.lua</File>
-		<File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.xml</File>
+		<!-- <File>C6GUE/UI/Additions/CommonFrontend.lua</File> -->
+		<!-- <File>C6GUE/UI/Replacements/AdvancedSetup_ENWS.lua</File> -->
+		<!-- <File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.lua</File> -->
+		<!-- <File>C6GUE/UI/Replacements/EnhancedAdvancedSetup.xml</File> -->
 		<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
-		<File>C6GUE/UI/Replacements/MainMenu.xml</File>
-		<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.lua</File>
-		<File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.xml</File>
-		<File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File>
+		<!-- <File>C6GUE/UI/Replacements/MainMenu.xml</File> -->
+		<!-- <File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.lua</File> -->
+		<!-- <File>C6GUE/UI/Replacements/Multiplayer/EnhancedHostGame.xml</File> -->
+		<!-- <File>C6GUE/UI/Replacements/Multiplayer/HostGame_ENWS.lua</File> -->
 	</Files>
 </Mod>

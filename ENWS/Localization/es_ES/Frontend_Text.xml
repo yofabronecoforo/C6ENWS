@@ -33,11 +33,11 @@
 		<Replace Tag="LOC_PRIORITIZE_NONE" Language="es_ES">
 			<Text>Priorizar ninguno</Text>
 		</Replace>
-		<Replace Tag="LOC_PICKER_SELECTED_TEXT" Language="es_ES">
+		<!-- <Replace Tag="LOC_PICKER_SELECTED_TEXT" Language="es_ES">
 			<Text>Seleccionada</Text>
-		</Replace>
-		<Replace Tag="LOC_PICKER_PRIORITIZED_TEXT" Language="es_ES">
+		</Replace> -->
+		<!-- <Replace Tag="LOC_PICKER_PRIORITIZED_TEXT" Language="es_ES">
 			<Text>Priorizada</Text>
-		</Replace>
+		</Replace> -->
     </LocalizedText>
 </GameData>
