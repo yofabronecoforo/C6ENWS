@@ -77,6 +77,7 @@ function OnConfirmChanges()
 	LuaEvents.NaturalWonderPicker_SetParameterValues(m_Parameter.ParameterId, values);
 	GameConfiguration.SetValue("PRIORITY_NATURAL_WONDERS", priority);           -- ENWS: store sorted priority list as a game configuration setting
 	GameConfiguration.SetValue("PRIORITY_NATURAL_WONDERS_COUNT", #priority);    -- ENWS: update the global priority selections counter
+	GameConfiguration.SetValue("START_NATURAL_WONDERS", priority);              -- ENWS: support Start by Wonders
 	Close();
 end
 
