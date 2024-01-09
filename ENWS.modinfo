@@ -31,7 +31,7 @@
 				<LoadOrder>-52</LoadOrder>
 			</Properties>
 			<!-- configuration db schema changes -->
-			<File Priority="2">ENWS/Configuration/Schema.sql</File>
+			<File Priority="2">enws/configuration/schema.sql</File>
 		</UpdateDatabase>
 		<UpdateText id="ENWS_CONFIGURATION_TEXT">
 			<!-- this needs to load RFL -->
@@ -39,11 +39,11 @@
         		<LoadOrder>2000000</LoadOrder>
       		</Properties>
 			<!-- EN_US localized frontend text -->
-			<File>ENWS/Localization/en_US/Frontend_Text.xml</File>
+			<File>enws/localization/en_us/frontend_text.xml</File>
 			<!-- ES_ES localized frontend text -->
-			<File>ENWS/Localization/es_ES/Frontend_Text.xml</File>
+			<File>enws/localization/es_es/frontend_text.xml</File>
 			<!-- FR_FR localized frontend text -->
-			<File>ENWS/Localization/fr_FR/Frontend_Text.xml</File>
+			<File>enws/localization/fr_fr/frontend_text.xml</File>
 		</UpdateText>
 		<ImportFiles id="ENWS_CONFIGURATION_UI">
 			<!-- this needs to load RFL -->
@@ -52,10 +52,10 @@
       		</Properties>
 			<Items>
 				<!-- natural wonder picker -->
-				<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
-				<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
+				<File>enws/ui/naturalwonderpicker.lua</File>
+				<File>enws/ui/naturalwonderpicker.xml</File>
 				<!-- game setup logic replacements -->
-				<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
+				<File>enws/ui/gamesetuplogic_enws.lua</File>
 			</Items>
 		</ImportFiles>
 		<UpdateDatabase id="ENWS_CONFIGURATION_DATABASE">
@@ -64,8 +64,8 @@
         		<LoadOrder>2000002</LoadOrder>
       		</Properties>
 			<!-- configuration database changes -->
-			<File Priority="2">ENWS/Configuration/Frontend.sql</File>
-			<File Priority="1">ENWS/Configuration/Frontend.xml</File>
+			<File Priority="2">enws/configuration/frontend.sql</File>
+			<File Priority="1">enws/configuration/frontend.xml</File>
         </UpdateDatabase>
     </FrontEndActions>
 	<InGameActions>
@@ -76,7 +76,7 @@
       		</Properties>
 			<!-- gameplay natural wonder generator script replacement -->
 			<Items>
-				<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
+				<File>enws/maps/utility/NaturalWonderGenerator.lua</File>
 			</Items>
 		</ImportFiles>
 		<ImportFiles id="ENWS_YNAMP_LOAD_DATABASE" criteria="ENWS">
@@ -85,7 +85,7 @@
         		<LoadOrder>2000001</LoadOrder>
       		</Properties>
 			<!-- load ENWS frontend scripts here for YnAMP compatibility -->
-			<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
+			<File>enws/ui/gamesetuplogic_enws.lua</File>
 		</ImportFiles>
 	</InGameActions>
 	<LocalizedText>
@@ -116,23 +116,23 @@
 		</Text>
 	</LocalizedText>
 	<Files>
-		<!-- configuration db schema changes -->
-		<File>ENWS/Configuration/Schema.sql</File>
 		<!-- configuration database changes -->
-		<File>ENWS/Configuration/Frontend.sql</File>
-		<File>ENWS/Configuration/Frontend.xml</File>
+		<File>enws/configuration/frontend.sql</File>
+		<File>enws/configuration/frontend.xml</File>
+		<!-- configuration db schema changes -->
+		<File>enws/configuration/schema.sql</File>
 		<!-- EN_US localized frontend text -->
-		<File>ENWS/Localization/en_US/Frontend_Text.xml</File>
+		<File>enws/localization/en_us/frontend_text.xml</File>
 		<!-- ES_ES localized frontend text -->
-		<File>ENWS/Localization/es_ES/Frontend_Text.xml</File>
+		<File>enws/localization/es_es/frontend_text.xml</File>
 		<!-- FR_FR localized frontend text -->
-		<File>ENWS/Localization/fr_FR/Frontend_Text.xml</File>
+		<File>enws/localization/fr_fr/frontend_text.xml</File>
 		<!-- gameplay natural wonder generator script replacement -->
-		<File>ENWS/Maps/Utility/NaturalWonderGenerator.lua</File>
-		<!-- natural wonder picker -->
-		<File>ENWS/UI/Additions/NaturalWonderPicker.lua</File>
-		<File>ENWS/UI/Additions/NaturalWonderPicker.xml</File>
+		<File>enws/maps/utility/NaturalWonderGenerator.lua</File>
 		<!-- game setup logic replacements -->
-		<File>C6GUE/UI/Replacements/GameSetupLogic_ENWS.lua</File>
+		<File>enws/ui/gamesetuplogic_enws.lua</File>
+		<!-- natural wonder picker -->
+		<File>enws/ui/naturalwonderpicker.lua</File>
+		<File>enws/ui/naturalwonderpicker.xml</File>
 	</Files>
 </Mod>
