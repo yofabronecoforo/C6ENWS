@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ENWS : Enhanced Natural Wonders Selection for Civilization VI. Copyright (c) 2020-2021 zzragnar0kzz. All rights reserved. -->
+<GameInfo>
+	<!-- ENWS : 2021/04/10 : This is still here because my dumb ass hasn't yet figured out how to incorporate it into the mod's SQL configuration
+		May not even be necessary, if MAP_MIN_NATURAL_WONDERS and MAP_MAX_NATURAL_WONDERS were used directly in the specified SQL queries
+		Further investigation required; for now, leave this alone -->
+    <QueryParameters>
+        <!-- Parameters for queries to set the lower and upper boundaries of the Natural Wonders slider(s) -->
+		<Row QueryId="StandardNaturalWonderCountRange" Index="1" ConfigurationGroup="Map" ConfigurationId="MAP_MIN_NATURAL_WONDERS"/>
+		<Row QueryId="StandardNaturalWonderCountRange" Index="2" ConfigurationGroup="Map" ConfigurationId="MAP_MAX_NATURAL_WONDERS"/>
+		<Row QueryId="Expansion1NaturalWonderCountRange" Index="1" ConfigurationGroup="Map" ConfigurationId="MAP_MIN_NATURAL_WONDERS"/>
+		<Row QueryId="Expansion1NaturalWonderCountRange" Index="2" ConfigurationGroup="Map" ConfigurationId="MAP_MAX_NATURAL_WONDERS"/>
+		<Row QueryId="Expansion2NaturalWonderCountRange" Index="1" ConfigurationGroup="Map" ConfigurationId="MAP_MIN_NATURAL_WONDERS"/>
+		<Row QueryId="Expansion2NaturalWonderCountRange" Index="2" ConfigurationGroup="Map" ConfigurationId="MAP_MAX_NATURAL_WONDERS"/>
+	</QueryParameters>
+</GameInfo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==========================================================================
+	ENWS : Enhanced Natural Wonders Selection for Civilization VI
+	Copyright (C) 2020-2021 zzragnar0kzz
+	All rights reserved
+===========================================================================-->
+<!-- localized frontend text for es_ES -->
+<GameData>
+	<LocalizedText>
+		<!-- Natural Wonders slider(s) -->
+		<Replace Tag="LOC_NATURAL_WONDER_COUNT_NAME" Language="es_ES">
+			<Text>Maravillas naturales</Text>
+		</Replace>
+		<Replace Tag="LOC_NATURAL_WONDER_COUNT_DESCRIPTION" Language="es_ES">
+			<Text>La cantidad de maravillas naturales que aparecerán en el mapa.</Text>
+		</Replace>
+		<!-- Natural Wonders picker controls text -->
+		<Replace Tag="LOC_EXCLUDE_NATURAL_WONDER_PICKER_DESC" Language="es_ES">
+			<Text>Elige y/o prioriza qué Maravillas Naturales pueden aparecer en el mapa.</Text>
+		</Replace>
+		<Replace Tag="LOC_NW_BUTTON_TT_TEXT" Language="es_ES">
+			<Text>Haga clic aquí para recorrer los estados seleccionados, priorizados y no seleccionados para esta maravilla natural. Haga clic en la casilla de verificación correspondiente para (des)seleccionarla o (des)priorizarla directamente.</Text>
+		</Replace>
+		<Replace Tag="LOC_NW_SELECTED_TT_TEXT" Language="es_ES">
+			<Text>Cuando esté marcada, esta maravilla natural se considerará para su colocación al inicio del juego.[NEWLINE]Cuando no esté marcada, se agregará a la lista de exclusión y [COLOR_RED]NO[ENDCOLOR] será considerada.[NEWLINE]La exclusión y la priorización son mutuamente excluyentes.[NEWLINE]La selección no garantiza la colocación; Se respetan los requisitos de la trama y el valor del control deslizante.</Text>
+		</Replace>
+		<Replace Tag="LOC_NW_PRIORITY_TT_TEXT" Language="es_ES">
+			<Text>Cuando esté marcada, esta Maravilla Natural se agregará a la lista de prioridades. Al comienzo del juego, los elementos de la lista de prioridades se considerarán [COLOR_Blue]ANTES[ENDCOLOR] otras selecciones.[NEWLINE]Cuando no está marcado, se considerará según el estado de su casilla de selección.[NEWLINE]La priorización y la exclusión son mutuamente excluyentes.[NEWLINE]La prioridad no garantiza la ubicación; Se respetan los requisitos de la trama y el valor del control deslizante.</Text>
+		</Replace>
+		<Replace Tag="LOC_PRIORITIZE_ALL" Language="es_ES">
+			<Text>Priorizar todo</Text>
+		</Replace>
+		<Replace Tag="LOC_PRIORITIZE_NONE" Language="es_ES">
+			<Text>Priorizar ninguno</Text>
+		</Replace>
+		<!-- <Replace Tag="LOC_PICKER_SELECTED_TEXT" Language="es_ES">
+			<Text>Seleccionada</Text>
+		</Replace> -->
+		<!-- <Replace Tag="LOC_PICKER_PRIORITIZED_TEXT" Language="es_ES">
+			<Text>Priorizada</Text>
+		</Replace> -->
+    </LocalizedText>
+</GameData>

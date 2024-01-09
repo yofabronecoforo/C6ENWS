@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--==========================================================================
+	ENWS : Enhanced Natural Wonders Selection for Civilization VI
+	Copyright (C) 2020-2021 zzragnar0kzz
+	All rights reserved
+===========================================================================-->
+<!-- localized frontend text for en_US -->
+<GameData>
+	<LocalizedText>
+		<!-- Natural Wonders slider(s) -->
+		<Replace Tag="LOC_NATURAL_WONDER_COUNT_NAME" Language="en_US">
+			<Text>Natural Wonders</Text>
+		</Replace>
+		<Replace Tag="LOC_NATURAL_WONDER_COUNT_DESCRIPTION" Language="en_US">
+			<Text>The number of natural wonders that will appear on the map.</Text>
+		</Replace>
+		<!-- Natural Wonders picker controls text -->
+		<Replace Tag="LOC_EXCLUDE_NATURAL_WONDER_PICKER_DESC" Language="en_US">
+			<Text>Choose and/or prioritize which Natural Wonders may appear on the map.</Text>
+		</Replace>
+		<Replace Tag="LOC_NW_BUTTON_TT_TEXT" Language="en_US">
+			<Text>Click here to cycle through selected, prioritized, and deselected states for this Natural Wonder. Click the appropriate checkbox to directly (de)select or (de)prioritize it.</Text>
+		</Replace>
+		<Replace Tag="LOC_NW_SELECTED_TT_TEXT" Language="en_US">
+			<Text>When checked, this Natural Wonder will be considered for placement at game start.[NEWLINE]When unchecked, it will be added to the exclusion list and will [COLOR_RED]NOT[ENDCOLOR] be considered.[NEWLINE]Exclusion and prioritization are mutually exclusive.[NEWLINE]Selection does not guarantee placement; plot requirements and the slider value are respected.</Text>
+		</Replace>
+		<Replace Tag="LOC_NW_PRIORITY_TT_TEXT" Language="en_US">
+			<Text>When checked, this Natural Wonder will be added to the priority list. At game start, items in the priority list will be considered [COLOR_Blue]BEFORE[ENDCOLOR] other selections.[NEWLINE]When unchecked, it will be considered according to the status of its selection box.[NEWLINE]Prioritization and exclusion are mutually exclusive.[NEWLINE]Priority does not guarantee placement; plot requirements and the slider value are respected.</Text>
+		</Replace>
+		<Replace Tag="LOC_PRIORITIZE_ALL" Language="en_US">
+			<Text>Prioritize All</Text>
+		</Replace>
+		<Replace Tag="LOC_PRIORITIZE_NONE" Language="en_US">
+			<Text>Prioritize None</Text>
+		</Replace>
+		<!-- <Replace Tag="LOC_PICKER_SELECTED_TEXT" Language="en_US">
+			<Text>Selected</Text>
+		</Replace> -->
+		<!-- <Replace Tag="LOC_PICKER_PRIORITIZED_TEXT" Language="en_US">
+			<Text>Prioritized</Text>
+		</Replace> -->
+    </LocalizedText>
+</GameData>
