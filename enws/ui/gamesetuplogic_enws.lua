@@ -1,6 +1,6 @@
 --[[ =========================================================================
-	ENWS : Enhanced Natural Wonders Selection for Civilization VI
-	Copyright (C) 2020-2023 zzragnar0kzz
+	C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
+	Copyright (C) 2020-2024 zzragnar0kzz
 	All rights reserved
 =========================================================================== ]]
 

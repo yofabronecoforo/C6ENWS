@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ENWS : Enhanced Natural Wonders Selection for Civilization VI. Copyright (c) 2020-2023 zzragnar0kzz. All rights reserved. -->
+<!--==========================================================================
+	C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
+	Copyright (C) 2020-2024 zzragnar0kzz
+	All rights reserved
+===========================================================================-->
 <!-- ENWS : 2021/04/09 : This is a wholesale replacement of MultiSelectWindow.xml with the contents of CityStatePicker.xml, with modifications -->
 <Context xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\..\..\CivTech\Libs\ForgeUI\ForgeUI_Assets\Controls.xsd"
 		Style="FontNormal14">

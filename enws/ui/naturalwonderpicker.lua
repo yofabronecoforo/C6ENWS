@@ -1,14 +1,14 @@
--- ###########################################################################
---	ENWS : Enhanced Natural Wonders Selection for Civilization VI
---	Copyright (c) 2020-2023 zzragnar0kzz
---	All rights reserved.
--- ###########################################################################
+--[[ =========================================================================
+	C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
+	Copyright (C) 2020-2024 zzragnar0kzz
+	All rights reserved
+=========================================================================== ]]
 
--- ===========================================================================
--- Multi-Select window
--- currently only (officially) used by the Natural Wonder picker
--- shit will probably break if other mods rely on this logic
--- ===========================================================================
+--[[ =========================================================================
+	Multi-Select window
+	currently only (officially) used by the Natural Wonder picker
+	shit will probably break if other mods rely on this logic
+=========================================================================== ]]
 
 include("InstanceManager");
 

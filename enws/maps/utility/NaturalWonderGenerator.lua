@@ -6,11 +6,11 @@
 --	Copyright (c) 2014 Firaxis Games, Inc. All rights reserved.
 ------------------------------------------------------------------------------
 
---############################################################################
---	ENWS : Enhanced Natural Wonders Selection for Civilization VI
---	Copyright (c) 2020-2023 zzragnar0kzz
---	All rights reserved.
---############################################################################
+--[[ =========================================================================
+	C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
+	Copyright (c) 2020-2024 zzragnar0kzz
+	All rights reserved.
+=========================================================================== ]]
 
 include "MapEnums"
 

@@ -1,11 +1,11 @@
 /* ###########################################################################
-    ENWS : Enhanced Natural Wonders Selection for Civilization VI
-    Copyright (c) 2020-2023 zzragnar0kzz
+    C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
+    Copyright (c) 2020-2024 zzragnar0kzz
     All rights reserved.
 ########################################################################### */
 
 /* ###########################################################################
-    Begin ENWS Frontend configuration
+    begin C6ENWS configuration
 ########################################################################### */
 
 -- 
@@ -124,5 +124,5 @@ SET MinNaturalWonders = 0, MaxNaturalWonders = 20, DefaultNaturalWonders = 12
 WHERE MapSizeType = 'MAPSIZE_HUGE' AND Domain = 'StandardMapSizes';
 
 /* ###########################################################################
-    End ENWS Frontend configuration
+    end C6ENWS configuration
 ########################################################################### */
