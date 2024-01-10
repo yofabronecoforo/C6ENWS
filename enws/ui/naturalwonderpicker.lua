@@ -12,7 +12,8 @@
 
 include("InstanceManager");
 
-print("Loading NaturalWonderPicker.lua . . .");
+print("[i]: Enhanced Natural Wonders Selection v8 (2024-01-09)")
+print("[+]: Loading NaturalWonderPicker.lua . . .");
 
 -- ===========================================================================
 -- Members

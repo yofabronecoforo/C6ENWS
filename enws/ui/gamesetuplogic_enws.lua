@@ -7,92 +7,7 @@
 --[[ =========================================================================
 	begin GameSetupLogic_ENWS.lua frontend script
 =========================================================================== ]]
-print("Loading GameSetupLogic_ENWS.lua . . .");
-
---[[ =========================================================================
-	store original function(s) that will be overwritten below
-=========================================================================== ]]
--- BASE_GameParameters_UI_DefaultCreateParameterDriver = (BASE_GameParameters_UI_DefaultCreateParameterDriver ~= nil) and BASE_GameParameters_UI_DefaultCreateParameterDriver or GameParameters_UI_DefaultCreateParameterDriver;
--- BASE_MapSize_ValueNeedsChanging = MapSize_ValueNeedsChanging;
--- BASE_MapSize_ValueChanged = MapSize_ValueChanged;
-
---[[ =========================================================================
-	OVERRIDE: if this parameter is the Goody Hut frequency slider, configure its control
-	otherwise, call the original GameParameters_UI_DefaultCreateParameterDriver() to configure this parameter's control
-=========================================================================== ]]
--- function GameParameters_UI_DefaultCreateParameterDriver(o, parameter, parent)
--- 	-- store the original value of parent if the original function must be called, which is the most likely outcome
--- 	local BASE_parent = parent;
-
--- 	if(parent == nil) then
--- 		parent = GetControlStack(parameter.GroupId);
--- 	end
-
--- 	local control;
-	
--- 	-- If there is no parent, don't visualize the control.  This is most likely a player parameter.
--- 	if(parent == nil) then
--- 		return;
--- 	end;
-
--- 	if (bEGHV_IsEnabled and parameter.ParameterId == "GoodyHutFrequency") then	-- configure the Goody Huts frequency slider
--- 		local minimumValue = parameter.Values.MinimumValue;
--- 		local maximumValue = parameter.Values.MaximumValue;
-	
--- 		-- Get the UI instance
--- 		local c = g_SliderParameterManager:GetInstance();	
-	
--- 		-- Store the root control, NOT the instance table.
--- 		g_SortingMap[tostring(c.Root)] = parameter;
-	
--- 		c.Root:ChangeParent(parent);
--- 		if c.StringName ~= nil then
--- 			c.StringName:SetText(parameter.Name);
--- 		end
-	
--- 		c.OptionTitle:SetText(parameter.Name);
--- 		c.Root:SetToolTipString(parameter.Description);
--- 		c.OptionSlider:RegisterSliderCallback(function()
--- 			local stepNum = c.OptionSlider:GetStep();
--- 			local value = minimumValue * stepNum;
-				
--- 			-- This method can get called pretty frequently, try and throttle it.
--- 			if(parameter.Value ~= minimumValue * stepNum) then
--- 				o:SetParameterValue(parameter, value);
--- 				BroadcastGameConfigChanges();
--- 			end
--- 		end);
-	
-	
--- 		control = {
--- 			Control = c,
--- 			UpdateValue = function(value)
--- 				if(value) then
--- 					c.OptionSlider:SetStep(value / minimumValue);
--- 					c.NumberDisplay:SetText(tostring(value));
--- 				end
--- 			end,
--- 			UpdateValues = function(values)
--- 				c.OptionSlider:SetNumSteps(values.MaximumValue / values.MinimumValue);
--- 				minimumValue = values.MinimumValue;
--- 				maximumValue = values.MaximumValue;
--- 			end,
--- 			SetEnabled = function(enabled, parameter)
--- 				c.OptionSlider:SetHide(not enabled or parameter.Values == nil or parameter.Values.MinimumValue == parameter.Values.MaximumValue);
--- 			end,
--- 			SetVisible = function(visible, parameter)
--- 				c.Root:SetHide(not visible or parameter.Value == nil );
--- 			end,
--- 			Destroy = function()
--- 				g_SliderParameterManager:ReleaseInstance(c);
--- 			end,
--- 		};
--- 	else -- call original function with BASE_parent in case parent changed above
--- 		control = BASE_GameParameters_UI_DefaultCreateParameterDriver(o, parameter, BASE_parent);
--- 	end
-
--- 	return control;
--- end
+print("[+]: Loading GameSetupLogic_ENWS.lua . . .");
 
 --[[ =========================================================================
 	OVERRIDE: replace MapSize_ValueNeedsChanging() wholesale to include necessary changes and avoid multiple DB queries
@@ -216,6 +131,11 @@ function MapSize_ValueChanged(p)
 		GameSetup_PlayerCountChanged();
 	end
 end
+
+--[[ =========================================================================
+	log successful loading of this component
+=========================================================================== ]]
+print("[i]: Finished loading GameSetupLogic_ENWS.lua, proceeding . . .");
 
 --[[ =========================================================================
 	end GameSetupLogic_ENWS.lua frontend script
