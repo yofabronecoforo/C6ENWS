@@ -1,5 +1,5 @@
 # Enhanced Natural Wonders Selection (ENWS) for Civilization VI
-A mod which enables additional frontend and gameplay settings related to Natural Wonders.
+A mod which enables additional Frontend and Ingame settings related to Natural Wonders.
 
 # Overview
 ENWS enables variable amounts of Natural Wonders on standard map sizes, with new minimum, maximum, and default amounts. For each size, any specific amount greater than or equal to the minimum value and less than or equal to the maximum value can be selected using the provided slider during game setup.
@@ -80,14 +80,13 @@ ENWS has not been tested with the following official game modes:
 - Zombie Defense
 
 ## Mod Compatibility
-ECFE was developed with the following mods enabled, and is thus known to be compatible with them:
+ENWS was developed with the following mods enabled, and is thus known to be compatible with them:
 - Better Civilization Icons
 - Better Coastal Cities and Water Tiles
 - Better Report Screen (UI)
 - Civilizations Expanded
 - CIVITAS City-States
 - Colorized Historic Moments
-- Community Quick User Interface (CQUI)
 - Enhanced Mod Manager
 - Extended Policy Cards
 - More Barbarian EXP
