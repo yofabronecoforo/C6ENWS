@@ -12,7 +12,7 @@
 
 include("InstanceManager");
 
-print("[i]: Enhanced Natural Wonders Selection v8 (2024-01-09)")
+print("[i]: Enhanced Natural Wonders Selection (ENWS) v8 (2024-01-09)");
 print("[+]: Loading NaturalWonderPicker.lua . . .");
 
 -- ===========================================================================
