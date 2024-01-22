@@ -106,7 +106,7 @@ When Start by Wonders is present and enabled, ENWS' priority list will be used t
 ENWS **IS NOT** compatible with Select Natural Wonders++; this mod will be blocked from loading when ENWS is enabled.
 
 # Installation
-ENWS can be installed via the Steam Workshopo or GitHub.
+ENWS can be installed via the Steam Workshop or GitHub.
 
 ## Automatic
 [Subscribe to ENWS in the Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2273495829) to automatically download and install the latest published release, and to automatically receive any updates as they are published to the Workshop.
