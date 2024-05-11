@@ -1,17 +1,18 @@
 --[[ =========================================================================
 	C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
-	Copyright (C) 2020-2024 zzragnar0kzz
+	Copyright (C) 2020-2024 yofabronecoforo (zzragnar0kzz)
 	All rights reserved
 =========================================================================== ]]
 
 --[[ =========================================================================
 	begin GameSetupLogic_ENWS.lua frontend script
 =========================================================================== ]]
-print("[+]: Loading GameSetupLogic_ENWS.lua . . .");
+print("[+]: Loading GameSetupLogic_ENWS.lua UI script . . .");
 
 --[[ =========================================================================
 	OVERRIDE: replace MapSize_ValueNeedsChanging() wholesale to include necessary changes and avoid multiple DB queries
 =========================================================================== ]]
+-- Pre_ENWS_MapSize_ValueNeedsChanging = MapSize_ValueNeedsChanging;
 function MapSize_ValueNeedsChanging(p)
 	local results = CachedQuery("SELECT * from MapSizes where Domain = ? and MapSizeType = ? LIMIT 1", p.Value.Domain, p.Value.Value);
 
@@ -72,6 +73,7 @@ end
 --[[ =========================================================================
 	OVERRIDE: replace MapSize_ValueChanged() wholesale to include necessary changes and avoid multiple DB queries
 =========================================================================== ]]
+-- Pre_ENWS_MapSize_ValueChanged = MapSize_ValueChanged;
 function MapSize_ValueChanged(p)
 	SetupParameters_Log("MAP SIZE CHANGED");
 
@@ -131,11 +133,6 @@ function MapSize_ValueChanged(p)
 		GameSetup_PlayerCountChanged();
 	end
 end
-
---[[ =========================================================================
-	log successful loading of this component
-=========================================================================== ]]
-print("[i]: Finished loading GameSetupLogic_ENWS.lua, proceeding . . .");
 
 --[[ =========================================================================
 	end GameSetupLogic_ENWS.lua frontend script
