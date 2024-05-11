@@ -10,6 +10,128 @@
 print("[+]: Loading GameSetupLogic_ENWS.lua UI script . . .");
 
 --[[ =========================================================================
+	OVERRIDE: pass arguments to pre-ENWS CreatePickerDriverByParameter() if parameter is not the Natural Wonder picker
+	otherwise create and return a driver for the Natural Wonder picker
+=========================================================================== ]]
+Pre_ENWS_CreatePickerDriverByParameter = CreatePickerDriverByParameter;
+function CreatePickerDriverByParameter(o, parameter, parent) 
+	if parameter.ParameterId ~= "NaturalWonders" then 
+		return Pre_ENWS_CreatePickerDriverByParameter(o, parameter, parent);
+	end
+
+	if(parent == nil) then
+		parent = GetControlStack(parameter.GroupId);
+	end
+			
+	-- Get the UI instance
+	local c :object = g_ButtonParameterManager:GetInstance();	
+
+	local parameterId = parameter.ParameterId;
+	local button = c.Button;
+
+	-- print(string.format("[+]: Creating driver for %s picker . . .", parameterId));
+
+	button:RegisterCallback( Mouse.eLClick, function()
+		LuaEvents.NaturalWonderPicker_Initialize(o.Parameters[parameterId], g_GameParameters);
+		Controls.NaturalWonderPicker:SetHide(false);
+	end);
+	button:SetToolTipString(parameter.Description .. ECFE.Content.Tooltips[GameConfiguration.GetValue("RULESET")][parameterId]);    -- show content sources in tooltip text
+
+	-- Store the root control, NOT the instance table.
+	g_SortingMap[tostring(c.ButtonRoot)] = parameter;
+
+	c.ButtonRoot:ChangeParent(parent);
+	if c.StringName ~= nil then
+		c.StringName:SetText(parameter.Name);
+	end
+
+	local cache = {};
+
+	local kDriver :table = {
+		Control = c,
+		Cache = cache,
+		UpdateValue = function(value, p)
+			local valueText = value and value.Name or nil;
+			local valueAmount :number = 0;
+			local priorityAmount :number = GameConfiguration.GetValue("PRIORITY_NATURAL_WONDERS_COUNT") or 0;
+
+			-- only amounts displayed by valueText change now so updates to it have been removed here; can this be further simplified?
+			if (valueText == nil) then 
+				if (value == nil) then 
+					if (parameter.UxHint ~= nil and parameter.UxHint == "InvertSelection") then 
+						valueAmount = #p.Values;  -- all available items
+					end
+				elseif (type(value) == "table") then 
+					local count = #value;
+					if (parameter.UxHint ~= nil and parameter.UxHint == "InvertSelection") then 
+						if (count == 0) then 
+							valueAmount = #p.Values;    -- all available items
+						else 
+							valueAmount = #p.Values - count;    -- custom non-zero selection
+						end
+					else 
+						if (count == #p.Values) then 
+							valueAmount = #p.Values;    -- all available items
+						else 
+							valueAmount = count;    -- custom non-zero selection
+						end
+					end
+				end
+			end
+
+			-- update valueText here and append priorityText
+			local priorityText = (priorityAmount > 0) and string.format(", %s %d", Locale.Lookup("LOC_PICKER_PRIORITIZED_TEXT"), priorityAmount) or "";
+			valueText = string.format("%s %d of %d%s", Locale.Lookup("LOC_PICKER_SELECTED_TEXT"), valueAmount, #p.Values, priorityText);
+
+			-- add update to tooltip text and update to cached PriorityAmount here
+			if(cache.ValueText ~= valueText) or (cache.ValueAmount ~= valueAmount) or (cache.PriorityAmount ~= priorityAmount) then 
+				local button = c.Button;
+				button:LocalizeAndSetText(valueText);
+				cache.ValueText = valueText;
+				cache.ValueAmount = valueAmount;
+				cache.PriorityAmount = priorityAmount;
+				button:SetToolTipString(parameter.Description .. ECFE.Content.Tooltips[GameConfiguration.GetValue("RULESET")][parameterId]);    -- show content sources in tooltip text
+			end
+		end,
+		UpdateValues = function(values, p) 
+			-- Values are refreshed when the window is open.
+		end,
+		SetEnabled = function(enabled, p)
+			c.Button:SetDisabled(not enabled or #p.Values <= 1);
+		end,
+		SetVisible = function(visible)
+			c.ButtonRoot:SetHide(not visible);
+		end,
+		Destroy = function()
+			g_ButtonParameterManager:ReleaseInstance(c);
+		end,
+	};	
+
+	return kDriver;
+end
+
+--[[ =========================================================================
+	OVERRIDE: call pre-ENWS OnShutdown() and remove LuaEvent listeners for the Natural Wonder picker
+=========================================================================== ]]
+Pre_ENWS_OnShutdown = OnShutdown;
+function OnShutdown()
+    Pre_ENWS_OnShutdown();
+	LuaEvents.NaturalWonderPicker_SetParameterValues.Remove(OnSetParameterValues);
+	-- LuaEvents.NaturalWonderPicker_SetParameterValue.Remove(OnSetParameterValue);
+end
+
+--[[ =========================================================================
+	reset SetShutdown handler for this context with updated OnShutdown()
+=========================================================================== ]]
+ContextPtr:SetShutdown( OnShutdown );
+
+--[[ =========================================================================
+	add new LuaEvent listeners for the Natural Wonder picker
+=========================================================================== ]]
+LuaEvents.NaturalWonderPicker_SetParameterValues.Add(OnSetParameterValues);
+-- LuaEvents.NaturalWonderPicker_SetParameterValue.Add(OnSetParameterValue);
+
+--[[ =========================================================================
 	OVERRIDE: replace MapSize_ValueNeedsChanging() wholesale to include necessary changes and avoid multiple DB queries
 =========================================================================== ]]
 -- Pre_ENWS_MapSize_ValueNeedsChanging = MapSize_ValueNeedsChanging;
