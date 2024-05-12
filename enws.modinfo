@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="8.0">
+<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="9.0">
     <Properties>
         <Name>LOC_ENWS_MOD_TITLE</Name>
+		<Version>1.9.240512.0436</Version>
         <Teaser>LOC_ENWS_MOD_TEASER</Teaser>
         <Description>LOC_ENWS_MOD_DESCRIPTION</Description>
         <Authors>LOC_ENWS_MOD_AUTHORS</Authors>
@@ -105,9 +106,9 @@
 			<fr_FR>Active un nombre variable de merveilles naturelles sur chaque taille de carte intégrée, allant de zéro à deux fois le nombre par défaut pour une taille de carte donnée.[NEWLINE][NEWLINE]Fournit un curseur pour contrôler le nombre de merveilles naturelles qui apparaissent dans un jeu.[NEWLINE][NEWLINE]Met à jour dynamiquement le texte de l'infobulle du sélecteur Natural Wonders afin de refléter les sources du contenu disponible. Cette modification s'applique également au texte de l'infobulle des sélecteurs City-States et Leader Pool.</fr_FR>
 		</Text>
 		<Text id="LOC_ENWS_MOD_AUTHORS">
-			<en_US>zzragnar0kzz</en_US>
-			<es_ES>zzragnar0kzz</es_ES>
-			<fr_FR>zzragnar0kzz</fr_FR>
+			<en_US>yofabronecoforo</en_US>
+			<es_ES>yofabronecoforo</es_ES>
+			<fr_FR>yofabronecoforo</fr_FR>
 		</Text>
 		<Text id="LOC_ENWS_MOD_SPECIALTHANKS">
 			<en_US>The Community</en_US>
