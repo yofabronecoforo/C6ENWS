@@ -117,7 +117,7 @@ Pre_ENWS_OnShutdown = OnShutdown;
 function OnShutdown()
     Pre_ENWS_OnShutdown();
 	LuaEvents.NaturalWonderPicker_SetParameterValues.Remove(OnSetParameterValues);
-	-- LuaEvents.NaturalWonderPicker_SetParameterValue.Remove(OnSetParameterValue);
+	LuaEvents.NaturalWonderPicker_SetParameterValue.Remove(OnSetParameterValue);
 end
 
 --[[ =========================================================================
@@ -129,7 +129,7 @@ ContextPtr:SetShutdown( OnShutdown );
 	add new LuaEvent listeners for the Natural Wonder picker
 =========================================================================== ]]
 LuaEvents.NaturalWonderPicker_SetParameterValues.Add(OnSetParameterValues);
--- LuaEvents.NaturalWonderPicker_SetParameterValue.Add(OnSetParameterValue);
+LuaEvents.NaturalWonderPicker_SetParameterValue.Add(OnSetParameterValue);
 
 --[[ =========================================================================
 	OVERRIDE: replace MapSize_ValueNeedsChanging() wholesale to include necessary changes and avoid multiple DB queries
