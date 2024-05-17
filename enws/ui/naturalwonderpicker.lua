@@ -1,6 +1,6 @@
 --[[ =========================================================================
 	C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
-	Copyright (C) 2020-2024 zzragnar0kzz
+	Copyright (C) 2020-2024 yofabronecoforo
 	All rights reserved
 =========================================================================== ]]
 
@@ -10,10 +10,13 @@
 	shit will probably break if other mods rely on this logic
 =========================================================================== ]]
 
+ECFE = ExposedMembers;
+
 include("InstanceManager");
 
-print("[i]: Enhanced Natural Wonders Selection (ENWS) v8 (2024-01-09)");
-print("[+]: Loading NaturalWonderPicker.lua . . .");
+print(string.format("[i]: Enhanced Natural Wonders Selection (ENWS) v%s: Loading NaturalWonderPicker.lua . . .", ECFE.Content.ENWS.Version));
+-- print("[i]: Enhanced Natural Wonders Selection (ENWS) v8 (2024-01-09)");
+-- print("[+]: Loading NaturalWonderPicker.lua . . .");
 
 -- ===========================================================================
 -- Members
