@@ -1,6 +1,6 @@
 /* ###########################################################################
     C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
-    Copyright (c) 2020-2024 zzragnar0kzz
+    Copyright (c) 2020-2024 yofabronecoforo
     All rights reserved.
 ########################################################################### */
 
@@ -8,7 +8,7 @@
     begin C6ENWS configuration
 ########################################################################### */
 
--- hide Start by Wonders' picker if it is present
+-- hide Start by Wonders' picker if it is present; the priority list will be copied to the StartWonders list if applicable
 UPDATE Parameters SET Visible = 0 WHERE ParameterID = 'StartWonders';
 
 -- reposition the Game Speed parameter
@@ -74,29 +74,34 @@ VALUES
 */
 
 -- define minimum, maximum, and default values for the Natural Wonders slider(s) for each standard map size
-UPDATE MapSizes 
-SET MinNaturalWonders = 0, MaxNaturalWonders = 4, DefaultNaturalWonders = 2
-WHERE MapSizeType = 'MAPSIZE_DUEL' AND Domain = 'StandardMapSizes';
+-- UPDATE MapSizes 
+-- SET MinNaturalWonders = 0, MaxNaturalWonders = 4, DefaultNaturalWonders = 2
+-- WHERE MapSizeType = 'MAPSIZE_DUEL' AND Domain = 'StandardMapSizes';
 
-UPDATE MapSizes 
-SET MinNaturalWonders = 0, MaxNaturalWonders = 6, DefaultNaturalWonders = 4
-WHERE MapSizeType = 'MAPSIZE_TINY' AND Domain = 'StandardMapSizes';
+-- UPDATE MapSizes 
+-- SET MinNaturalWonders = 0, MaxNaturalWonders = 6, DefaultNaturalWonders = 4
+-- WHERE MapSizeType = 'MAPSIZE_TINY' AND Domain = 'StandardMapSizes';
 
-UPDATE MapSizes 
-SET MinNaturalWonders = 0, MaxNaturalWonders = 10, DefaultNaturalWonders = 6
-WHERE MapSizeType = 'MAPSIZE_SMALL' AND Domain = 'StandardMapSizes';
+-- UPDATE MapSizes 
+-- SET MinNaturalWonders = 0, MaxNaturalWonders = 10, DefaultNaturalWonders = 6
+-- WHERE MapSizeType = 'MAPSIZE_SMALL' AND Domain = 'StandardMapSizes';
 
-UPDATE MapSizes 
-SET MinNaturalWonders = 0, MaxNaturalWonders = 14, DefaultNaturalWonders = 8
-WHERE MapSizeType = 'MAPSIZE_STANDARD' AND Domain = 'StandardMapSizes';
+-- UPDATE MapSizes 
+-- SET MinNaturalWonders = 0, MaxNaturalWonders = 14, DefaultNaturalWonders = 8
+-- WHERE MapSizeType = 'MAPSIZE_STANDARD' AND Domain = 'StandardMapSizes';
 
-UPDATE MapSizes 
-SET MinNaturalWonders = 0, MaxNaturalWonders = 16, DefaultNaturalWonders = 10
-WHERE MapSizeType = 'MAPSIZE_LARGE' AND Domain = 'StandardMapSizes';
+-- UPDATE MapSizes 
+-- SET MinNaturalWonders = 0, MaxNaturalWonders = 16, DefaultNaturalWonders = 10
+-- WHERE MapSizeType = 'MAPSIZE_LARGE' AND Domain = 'StandardMapSizes';
 
+-- UPDATE MapSizes 
+-- SET MinNaturalWonders = 0, MaxNaturalWonders = 20, DefaultNaturalWonders = 12
+-- WHERE MapSizeType = 'MAPSIZE_HUGE' AND Domain = 'StandardMapSizes';
+
+-- define minimum, maximum, and default Natural Wonders values for all Standard map sizes
 UPDATE MapSizes 
-SET MinNaturalWonders = 0, MaxNaturalWonders = 20, DefaultNaturalWonders = 12
-WHERE MapSizeType = 'MAPSIZE_HUGE' AND Domain = 'StandardMapSizes';
+SET DefaultNaturalWonders = DefaultPlayers, MaxNaturalWonders = (DefaultPlayers * 2), MinNaturalWonders = 0 
+WHERE Domain = 'StandardMapSizes';
 
 /* ###########################################################################
     end C6ENWS configuration
