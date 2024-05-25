@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="1.9">
+<Mod id="d0afae5b-02f8-4d01-bd54-c2bbc3d89858" version="1.10">
     <Properties>
         <Name>LOC_ENWS_MOD_TITLE</Name>
-		<Version>1.9.240517.1726</Version>
+		<Version>1.10.240525.2227</Version>
         <Teaser>LOC_ENWS_MOD_TEASER</Teaser>
         <Description>LOC_ENWS_MOD_DESCRIPTION</Description>
         <Authors>LOC_ENWS_MOD_AUTHORS</Authors>
