@@ -8,7 +8,7 @@
 
 --[[ =========================================================================
 	C6ENWS : Enhanced Natural Wonders Selection for Civilization VI
-	Copyright (c) 2020-2024 zzragnar0kzz
+	Copyright (c) 2020-2024 yofabronecoforo
 	All rights reserved.
 =========================================================================== ]]
 
